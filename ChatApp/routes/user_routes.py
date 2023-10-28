@@ -22,21 +22,15 @@ def userLogin():
   password = request.form.get('password')
 
   if email == '' or password == '':
-    #flash('空のフォームがあるようです')
-    print('空のフォームがあるようです')
+    flash('空のフォームがあるようです')
   else:
     user = UserDB.getUser(email)
-    if user is None:
-      #flash('このユーザーは存在しません')
-      print('このユーザーは存在しません')
+    hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    if (user is None) or (hashPassword != user["password"]):
+      flash('ユーザー名もしくはパスワードが間違っています')
     else:
-      hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
-      if hashPassword != user["password"]:
-        #flash('パスワードが間違っています！')
-        print('パスワードが間違っています！')
-      else:
-        session['uid'] = user["uid"]
-        return redirect('/')
+      session['user_id'] = user["user_id"]
+      return redirect('/')
   return redirect('/login')
 
 #Logout

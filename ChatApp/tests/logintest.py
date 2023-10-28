@@ -31,7 +31,7 @@ class LoginRouteTestCase(unittest.TestCase):
             response = self.app.post('/login', data={"email": "test@example.com", "password": "password123"})
             output = buf.getvalue()
         #self.assertIn('このユーザーは存在しません', response.data.decode())
-        self.assertIn('このユーザーは存在しません', output)
+        self.assertIn('ユーザー名もしくはパスワードが間違っています', output)
 
     @patch("routes.user_routes.UserDB.getUser")
     def test_login_wrong_password(self, mock_get_user):
@@ -44,19 +44,19 @@ class LoginRouteTestCase(unittest.TestCase):
             response = self.app.post('/login', data={"email": "test@example.com", "password": "password123"})
             output = buf.getvalue()
         #self.assertIn('パスワードが間違っています！', response.data.decode())
-        self.assertIn('パスワードが間違っています！', output)
+        self.assertIn('ユーザー名もしくはパスワードが間違っています', output)
 
     @patch("routes.user_routes.UserDB.getUser")
     def test_login_successful(self, mock_get_user):
         mock_user = {
-            "uid": 123,
+            "user_id": 123,
             "email": "test@example.com",
             "password": hashlib.sha256("password123".encode('utf-8')).hexdigest()
         }
         mock_get_user.return_value = mock_user
         with self.app:
             response = self.app.post('/login', data={"email": "test@example.com", "password": "password123"})
-            self.assertEqual(session["uid"], 123)
+            self.assertEqual(session["user_id"], 123)
             self.assertEqual(response.status_code, 302)  # リダイレクトのHTTPステータスコード
 
 if __name__ == '__main__':
