@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/img/favicon.ico" />
+    <link
+    rel="stylesheet"
+    href="/Users/Toshiki/Desktop/hackathon/static/css/styles.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <!--Faviconの読み込み-->
+    <link rel="icon" href="favicon.ico" />
+    <!--Font Awesome使用の読み込み-->
+    <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="registration-wrapper">
+      <div class="registration-container">
+        <img class="registration-logo"
+          src="/Users/Toshiki/Desktop/hackathon/static/img/rogo.png"
+          alt="logo"
+        >
+        <div class="registration-form-wrapper">
+          <div class="switch-register-mode-container">
+            <a class="switch-register-mode" 
+              href="/Users/Toshiki/Desktop/hackathon/templates/registration/signup.html">新規アカウント登録
+            </a>
+          </div>
+
+          <form class="registration-form" method="post">
+            <h1 class="registration-title">ログイン</h1>
+            <label for="name-input">ユーザー名</label>
+            <input
+              type="text"
+              placeholder="UserName"
+              name="name"
+              id="name-input"
+            />
+            <label for="password-input">パスワード</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password1"
+              id="password-input"
+            />
+          </form>
+          <div class="registration-button-container">
+            <button class="registration-button">ログイン</button>         
+          </div>
+          <div id="error-message">
+            <p>ユーザー名かパスワードが間違っています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

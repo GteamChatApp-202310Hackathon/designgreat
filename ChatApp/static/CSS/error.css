@@ -1,0 +1,33 @@
+.error-wrapper{
+  /* 画面縮小時、下に余白ができてしまう。error-form-wrapperが原因か？*/
+  width: 100vw;
+  min-height: 100vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  background-color: var(--grey);
+  background-size: cover;
+}
+
+.error-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}
+
+.error-logo {
+  width: 80%;
+}
+
+.error-body {
+  width:  100%; 
+  text-align: center;
+  color: var(--white);
+}
+
+.error-body h1{
+  font-size: 100px;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
+}
