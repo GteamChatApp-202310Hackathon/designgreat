@@ -1,0 +1,9 @@
+/* 色を使い回しできるように変数にする */
+
+:root {
+  --red: #FA0A0A;
+  --yellow: #FFDE59;
+  --grey: #767676;
+  --white: #ffffff;
+  --black: #000000;
+}

@@ -1,0 +1,9 @@
+/* 全てのCSSをまとめてエクスポート */
+
+@import "color.css";
+@import "base.css";
+@import "main.css";
+@import "detail.css";
+@import "registration.css";
+@import "error.css";
+@import "modal.css";
