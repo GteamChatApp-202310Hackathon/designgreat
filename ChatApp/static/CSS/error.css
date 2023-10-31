@@ -1,5 +1,4 @@
 .error-wrapper{
-  /* 画面縮小時、下に余白ができてしまう。error-form-wrapperが原因か？*/
   width: 100vw;
   min-height: 100vh;
   font-family: 'Noto Sans JP', sans-serif;

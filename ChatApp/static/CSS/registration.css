@@ -5,7 +5,7 @@
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 16px;
   color: var(--white);
-  background-image: url("/Users/Toshiki/Desktop/hackathon/static/img/regi_background.png");
+  background-image: url("../img/regi_background.png");
   background-size: cover;
   background-repeat: no-repeat; 
   background-attachment: fixed;
@@ -28,7 +28,7 @@
 .registration-form-wrapper {
   margin: 3% 6% 0 auto;
   width:  35%;
-  height: 90%; 
+  /* height: 90%;  */
   /* 原因？？ */
   overflow-y: scroll;
 }
@@ -119,12 +119,18 @@
   text-align: right;
 }
 
+#exception-error-messege{
+  bottom: 0;
+  margin: 0;
+  padding-left: 0.5rem;
+}
+
 /* ====レスポンシブ=== */
 
 @media screen and (max-width: 768px) {
   .registration-wrapper{
     font-size: 14px;
-    background-image: url("/Users/Toshiki/Desktop/hackathon/static/img/regi_background_mobile.png");
+    background-image: url("../img/regi_background_mobile.png");
   }
 
   .registration-logo {
