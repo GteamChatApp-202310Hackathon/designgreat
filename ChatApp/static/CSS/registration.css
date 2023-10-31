@@ -1,0 +1,170 @@
+.registration-wrapper{
+  /* 画面縮小時、下に余白ができてしまう。registration-form-wrapperが原因か？*/
+  width: 100vw;
+  min-height: 100vh;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  background-image: url("../img/regi_background.png");
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.registration-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}
+
+.registration-logo {
+  position: fixed;
+  width: 40%;
+  margin: 2%;
+}
+
+.registration-form-wrapper {
+  margin: 3% 6% 0 auto;
+  width:  35%;
+  /* height: 90%;  */
+  /* 原因？？ */
+  overflow-y: scroll;
+}
+
+.switch-register-mode-container {
+  text-align: right;
+}
+.switch-register-mode {
+  text-align: right;
+  color: var(--white);
+}
+
+.registration-form label{
+  display: block;
+  margin-top: 2%;
+  padding-left: 0.5rem;
+}
+
+.registration-form input{
+  width: 100%;
+  height: 3rem;
+  border:none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  font-size: large;
+} 
+
+.teachers-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teachers-check {
+  width: 50%;
+  height: 100%;
+  
+}
+
+.teachers-check input{
+  width: 20%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  margin:auto;
+}
+
+.teachers-check label{
+  display:block;
+  position:relative;
+  padding-left:25%;
+  margin-top: 0;
+}
+
+.teachers-passform {
+  width: 50%;
+}
+
+.registration-button {
+  width: 100%;
+  margin-top: 5%;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--yellow);
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+}
+
+.error-message-position{
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items:baseline
+}
+
+#error-message{
+  color: var(--red);
+  position: relative;
+}
+#error-message p{
+  bottom: 0;
+  margin: 0;
+  text-align: right;
+}
+
+#exception-error-messege{
+  bottom: 0;
+  margin: 0;
+  padding-left: 0.5rem;
+}
+
+/* ====レスポンシブ=== */
+
+@media screen and (max-width: 768px) {
+  .registration-wrapper{
+    font-size: 14px;
+    background-image: url("../img/regi_background_mobile.png");
+  }
+
+  .registration-logo {
+    position:absolute;
+    width: 60%;
+    margin: 2%;
+  }
+
+  .registration-form-wrapper {
+    margin: 10% auto auto auto;
+    width:  80%;
+    overflow-y: scroll;
+  }
+
+  .switch-register-mode-container {
+    text-align: right;
+    margin-top: 5%;
+  }
+
+  .registration-button {
+    width: 100%;
+    margin-top: 5%;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--yellow);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+  }
+
+  .teachers-passform {
+    width: 60%;
+  }
+
+}
