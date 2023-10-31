@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>トークルーム</title>
+    <!-- できるなら変更予定--------
+      <title>{{ channel.name }}<</title> 
+    ------------------------------>
+    <link rel="stylesheet" href="./../static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../static/img/favicon.ico" />
+    <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+<div class="main-container">
+  <div class="chat-box">
+    <div id="chat-header">
+      <p id="chatroom-name">デザイン基礎201</p>
+      <p id="chatroom-description">火曜日3限：福山講師</p>
+      <!-- ====差し替え予定＝＝＝
+      <p id="chatroom-name">{{ channel.name }}</p>
+      {% if channel.abstract is not none %}
+      <p id="chatroom-description">{{ channel.abstract }}</p>
+      {% endif %} 
+      ======================== -->
+      <button id="channel-update-button">
+        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+      </button>
+      <!-- ====差し替え予定＝＝＝
+      {% if uid == channel.uid %}
+      <button id="channel-update-button">
+        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+      </button>
+      {% include 'modal/update-channel.html' %} {% endif %}
+      ======================== -->
+
+      <button id="to-index-button">
+        <a class="fas fa-home" href="./index.html"></a>
+      </button>
+    </div>
+    <div class="pinned-message-area">
+      <p id="pinned-message">{{ **pinned** }}</p>
+      <!-- ========差し替え予定＝＝＝
+      {% if **pinned** is not none %}
+      <div class="pinned-message-area">
+        <p id="pinned-message">{{ **pinned** }}</p>
+      </div>
+      {% endif %} 
+      ======================== -->
+    </div>
+
+
+    <!--------- feature/141はここまでです ---------->
+    <div id="message-area">
+      <div class="my-messages">
+        <p class="box box-right">テスト生徒</p>
+        <!-- valueのところバックエンドのデータ-->
+        <form action="/delete_message" method="POST">
+          <input type="hidden" value="#" name="cid" />
+          
+          <button class="delete-message-button" name="message_id" value="#">
+            <i class="fa-regular fa-trash-can fa-lg" style="color: #767676;"></i>
+          </button>
+        </form>
+      </div>
+      
+      <div class="messages">
+        <p class="user-name">福山講師</p>
+        <p class="box box-left">テスト講師</p>
+      </div>
+
+    </div>
+    <div class="typing-box-wrapper">
+      <form class="typing-box" action="/message" method="POST" name="newMessageForm">
+        <textarea name="message" id="message" autofocus></textarea>
+        <input type="hidden" name="cid" value="#" />
+        <div id="message-send-tooltip">
+          <button type="submit" id="add-message-button">
+            <i class="fa-regular fa-paper-plane fa-lg"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+
+  </body>
+</html>
