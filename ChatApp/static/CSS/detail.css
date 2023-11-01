@@ -1,0 +1,234 @@
+.chat-box {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url("../img/background.png");
+  background-size: cover;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+}
+
+#chat-header {
+  background-color: var(--white);
+  color: var(--grey);
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+#chatroom-name {
+  font-size: 1.8rem;
+  margin-left: 2%;
+}
+
+#chatroom-description {
+  margin-left: 2em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+#channel-update-button {
+  color:var(--grey);
+  margin-left: 1em;
+  padding: 0.4em 0.4em;
+  font-size: 1.25rem;
+  border-radius:50%;
+  background-color: var(--yellow);
+  border:none;
+}
+
+#channel-update-button:hover {
+  background-color: var(--orange);
+  border:none;
+}
+
+#to-index-button{
+  font-size: 2.5rem;
+  background: none;
+  border:none;
+  margin-right: 2%;
+  margin-left: auto;
+}
+
+a.fa-home{
+  color:var(--grey);
+  text-decoration: none;
+}
+
+.pinned-message-area {
+  background-color: var(--yellow);
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  top: 8vh;
+  right: 0;
+  left: 0;
+  display: flex;
+  z-index: 2;
+  border-radius: 0 0 10px 10px;
+  overflow: scroll;
+}
+
+#pinned-message{
+  margin-left: 2rem;
+
+}
+
+/* <!--------- feature/141はここまでです ----------> */
+
+#message-area {
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 10vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/*スクロールバー非表示*/
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 10px;
+  color: #767676;
+  margin: 2px 0;
+}
+
+.my-messages {
+  display: flex;
+}
+
+.delete-message-button {
+  height: 40px;
+  width: 40px;
+  line-height: 60px;
+  padding: 0;
+  margin: 0;
+  bottom: 8px;
+  right: 8px;
+}
+
+.box {
+  position: relative;
+  width: 60%;
+  margin: 0;
+  padding: 0.9em 0 0.4em 1em;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  white-space: pre-wrap;
+  border-radius: 10px;
+}
+
+.box-left {
+  background-color: white;
+  color: #767676;
+}
+
+.box-right {
+  background-color: white;
+  color: #767676;
+  margin-left: auto;
+}
+
+.box-left:before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 100%;
+  height: 100%;
+}
+
+.box-right:before {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 100%;
+  height: 100%;
+}
+
+.typing-box-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 15vh;
+  background-color: white;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.typing-box {
+  height: 80%;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  background-color: var(--snow);
+  border-radius: 8px;
+  border: solid 1px lightgrey;
+  display: flex;
+}
+
+.typing-box textarea {
+  background-color: transparent;
+  width: 100%;
+  padding: 0.5em;
+  flex-grow: 1;
+}
+
+.typing-box textarea:focus {
+  cursor: pointer;
+}
+
+#add-message-button {
+  height: 100%;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+/* ========================================================== */
+/* レスポンシブ */
+
+@media screen and (max-width: 550px) {
+  #chatroom-description {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .chat-box {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .typing-box-wrapper,
+  #chat-header {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .box {
+    width: 40%;
+  }
+}
