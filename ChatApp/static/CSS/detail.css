@@ -1,0 +1,300 @@
+.chat-box {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url("../img/background.png");
+  background-size: cover;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+}
+
+#chat-header {
+  background-color: var(--white);
+  color: var(--grey);
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+#chatroom-name {
+  font-size: 1.8rem;
+  margin-left: 2%;
+}
+
+#chatroom-description {
+  margin-left: 2em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+#channel-update-button {
+  color:var(--grey);
+  margin-left: 1em;
+  padding: 0.4em 0.4em;
+  font-size: 1.25rem;
+  border-radius:50%;
+  background-color: var(--yellow);
+  border:none;
+}
+
+#channel-update-button:hover {
+  background-color: var(--orange);
+  border:none;
+}
+
+#to-index-button{
+  font-size: 2.5rem;
+  background: none;
+  border:none;
+  margin-right: 2%;
+  margin-left: auto;
+}
+
+a.fa-home{
+  color:var(--grey);
+  text-decoration: none;
+}
+
+.pinned-message-area {
+  background-color: var(--yellow);
+  height: 8vh;
+  width: 100vw;
+  position: fixed;
+  top: 8vh;
+  right: 0;
+  left: 0;
+  display: flex;
+  z-index: 2;
+  border-radius: 0 0 10px 10px;
+  overflow: scroll;
+}
+
+#pinned-message{
+  margin-left: 2rem;
+
+}
+
+/* <!--------- feature/141はここまでです ----------> */
+
+#message-area {
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 16vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.my-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-options{
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 1%;
+  align-items: baseline;
+}
+
+.option-icons{
+  display: flex;
+}
+
+.my-user-name{
+  font-size: 10px;
+  color: var(--grey);
+  margin: 2px 0;
+}
+
+.pinned-message-button{
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0 8px 0 8px;
+  color: var(--grey);
+}
+
+.fa-rotate-45 {
+	transform: rotate(45deg);
+}
+
+.delete-message-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0 8px 0 8px;
+  color: var(--grey);
+} 
+
+.box {
+  position: relative;
+  margin: 0;
+  padding: 0.9em 0 0.4em 1em;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
+  white-space: pre-wrap;
+  border-radius: 10px;
+  background-color: var(--white);
+  color: var(--grey);
+
+}
+
+.box-right {
+  width: 60%;
+  margin-left: auto;
+  margin-right: 1%;
+}
+
+.reaction-container{
+  display: flex;
+  align-items: baseline;
+
+}
+
+.reaction-container p{
+  background-color: var(--grey);
+  padding: 0.5em;
+  margin: 4px 0 0 0;
+  border-radius: 10px;
+  color: var(--white);
+
+}
+.reaction-button{
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5em;
+  margin: 4px 0 0 0;
+  color: var(--grey);
+}
+
+.reaction-container-right{
+  margin-left: auto;
+  margin-right: 1%;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.user-name {
+  font-size: 10px;
+  color: var(--grey);
+  margin: 2px 0 2px 2%;
+}
+
+.box-left {
+  margin-left: 1%;
+}
+
+.reaction-container-left{
+  margin-left: auto;
+}
+
+
+
+
+/* <!--------- feature/142はここまでです ----------> */
+
+
+
+
+
+
+
+.typing-box-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 15vh;
+  background-color: white;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.typing-box {
+  height: 80%;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  background-color: var(--snow);
+  border-radius: 8px;
+  border: solid 1px lightgrey;
+  display: flex;
+}
+
+.typing-box textarea {
+  background-color: transparent;
+  width: 100%;
+  padding: 0.5em;
+  flex-grow: 1;
+}
+
+.typing-box textarea:focus {
+  cursor: pointer;
+}
+
+#add-message-button {
+  height: 100%;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+/* ========================================================== */
+/* レスポンシブ */
+
+@media screen and (max-width: 550px) {
+  #chatroom-description {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .chat-box {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .typing-box-wrapper,
+  #chat-header {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .box-right{
+    width: 40%;
+  }
+  .message-options{
+    width: 40%;
+  }
+
+  .messages{
+    width: 40%;
+  }
+  
+}
