@@ -87,7 +87,7 @@ a.fa-home{
 #message-area {
   min-height: 100vh;
   width: 100%;
-  padding-top: 10vh;
+  padding-top: 16vh;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
@@ -95,39 +95,56 @@ a.fa-home{
   gap: 0.6rem;
 }
 
-/*スクロールバー非表示*/
 ::-webkit-scrollbar {
   width: 0px;
 }
 
-.messages {
+.my-messages {
   display: flex;
   flex-direction: column;
 }
 
-.user-name {
-  font-size: 10px;
-  color: #767676;
-  margin: 2px 0;
+.message-options{
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 1%;
+  align-items: baseline;
 }
 
-.my-messages {
+.option-icons{
   display: flex;
 }
 
-.delete-message-button {
-  height: 40px;
-  width: 40px;
-  line-height: 60px;
-  padding: 0;
-  margin: 0;
-  bottom: 8px;
-  right: 8px;
+.my-user-name{
+  font-size: 10px;
+  color: var(--grey);
+  margin: 2px 0;
 }
+
+.pinned-message-button{
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0 8px 0 8px;
+  color: var(--grey);
+}
+
+.fa-rotate-45 {
+	transform: rotate(45deg);
+}
+
+.delete-message-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0 8px 0 8px;
+  color: var(--grey);
+} 
 
 .box {
   position: relative;
-  width: 60%;
   margin: 0;
   padding: 0.9em 0 0.4em 1em;
   font-size: 14px;
@@ -135,34 +152,75 @@ a.fa-home{
   letter-spacing: 0.1em;
   white-space: pre-wrap;
   border-radius: 10px;
-}
+  background-color: var(--white);
+  color: var(--grey);
 
-.box-left {
-  background-color: white;
-  color: #767676;
 }
 
 .box-right {
-  background-color: white;
-  color: #767676;
+  width: 60%;
+  margin-left: auto;
+  margin-right: 1%;
+}
+
+.reaction-container{
+  display: flex;
+  align-items: baseline;
+
+}
+
+.reaction-container p{
+  background-color: var(--grey);
+  padding: 0.5em;
+  margin: 4px 0 0 0;
+  border-radius: 10px;
+  color: var(--white);
+
+}
+.reaction-button{
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5em;
+  margin: 4px 0 0 0;
+  color: var(--grey);
+}
+
+.reaction-container-right{
+  margin-left: auto;
+  margin-right: 1%;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.user-name {
+  font-size: 10px;
+  color: var(--grey);
+  margin: 2px 0 2px 2%;
+}
+
+.box-left {
+  margin-left: 1%;
+}
+
+.reaction-container-left{
   margin-left: auto;
 }
 
-.box-left:before {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 100%;
-  height: 100%;
-}
 
-.box-right:before {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  width: 100%;
-  height: 100%;
-}
+
+
+/* <!--------- feature/142はここまでです ----------> */
+
+
+
+
+
+
 
 .typing-box-wrapper {
   position: fixed;
@@ -228,7 +286,15 @@ a.fa-home{
 }
 
 @media only screen and (min-width: 640px) {
-  .box {
+  .box-right{
     width: 40%;
   }
+  .message-options{
+    width: 40%;
+  }
+
+  .messages{
+    width: 40%;
+  }
+  
 }

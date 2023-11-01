@@ -16,76 +16,208 @@
     <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-<div class="main-container">
-  <div class="chat-box">
-    <div id="chat-header">
-      <p id="chatroom-name">デザイン基礎201</p>
-      <p id="chatroom-description">火曜日3限：福山講師</p>
-      <!-- ====差し替え予定＝＝＝
-      <p id="chatroom-name">{{ channel.name }}</p>
-      {% if channel.abstract is not none %}
-      <p id="chatroom-description">{{ channel.abstract }}</p>
-      {% endif %} 
-      ======================== -->
-      <button id="channel-update-button">
-        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-      </button>
-      <!-- ====差し替え予定＝＝＝
-      {% if uid == channel.uid %}
-      <button id="channel-update-button">
-        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-      </button>
-      {% include 'modal/update-channel.html' %} {% endif %}
-      ======================== -->
-
-      <button id="to-index-button">
-        <a class="fas fa-home" href="./index.html"></a>
-      </button>
-    </div>
-    <div class="pinned-message-area">
-      <p id="pinned-message">{{ **pinned** }}</p>
-      <!-- ========差し替え予定＝＝＝
-      {% if **pinned** is not none %}
-      <div class="pinned-message-area">
-        <p id="pinned-message">{{ **pinned** }}</p>
-      </div>
-      {% endif %} 
-      ======================== -->
-    </div>
-
-
-    <!--------- feature/141はここまでです ---------->
-    <div id="message-area">
-      <div class="my-messages">
-        <p class="box box-right">テスト生徒</p>
-        <!-- valueのところバックエンドのデータ-->
-        <form action="/delete_message" method="POST">
-          <input type="hidden" value="#" name="cid" />
-          
-          <button class="delete-message-button" name="message_id" value="#">
-            <i class="fa-regular fa-trash-can fa-lg" style="color: #767676;"></i>
+    <div class="main-container">
+      <div class="chat-box">
+        <div id="chat-header">
+          <p id="chatroom-name">デザイン基礎201</p>
+          <p id="chatroom-description">火曜日3限：福山講師</p>
+          <!-- ====差し替え予定＝＝＝
+          <p id="chatroom-name">{{ channel.name }}</p>
+          {% if channel.abstract is not none %}
+          <p id="chatroom-description">{{ channel.abstract }}</p>
+          {% endif %} 
+          ======================== -->
+          <button id="channel-update-button">
+            <i class="fa-solid fa-pen-to-square fa-lg"></i>
           </button>
-        </form>
-      </div>
-      
-      <div class="messages">
-        <p class="user-name">福山講師</p>
-        <p class="box box-left">テスト講師</p>
-      </div>
+          <!-- ====差し替え予定＝＝＝
+          {% if uid == channel.uid %}
+          <button id="channel-update-button">
+            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+          </button>
+          {% include 'modal/update-channel.html' %} {% endif %}
+          ======================== -->
 
-    </div>
-    <div class="typing-box-wrapper">
-      <form class="typing-box" action="/message" method="POST" name="newMessageForm">
-        <textarea name="message" id="message" autofocus></textarea>
-        <input type="hidden" name="cid" value="#" />
-        <div id="message-send-tooltip">
-          <button type="submit" id="add-message-button">
-            <i class="fa-regular fa-paper-plane fa-lg"></i>
+          <button id="to-index-button">
+            <a class="fas fa-home" href="./index.html"></a>
           </button>
         </div>
-      </form>
+        <div class="pinned-message-area">
+          <p id="pinned-message">{{ **pinned** }}</p>
+          <!-- ========差し替え予定＝＝＝
+          {% if **pinned** is not none %}
+          <div class="pinned-message-area">
+            <p id="pinned-message">{{ **pinned** }}</p>
+          </div>
+          {% endif %} 
+          ======================== -->
+        </div>
+        <div id="message-area">
+          <div class="my-messages">
+            <div class="message-options">
+              <p class="my-user-name">{{ message.user_name }}</p>
+              <div class="option-icons">
+                <form action="/pin_message" method="POST">
+                  <input type="hidden" value="{{ channel.id }}" name="cid" />
+                  <button 
+                    class="pinned-message-button" 
+                    name="message_id" 
+                    value="{{ message.id }}"
+                  >
+                    <i class="fas fa-thumbtack fa-rotate-45"></i>
+                  </button>
+                </form>
+                <form action="/delete_message" method="POST">
+                  <input type="hidden" value="{{ channel.id }}" name="cid" />
+                  <button 
+                    class="delete-message-button" 
+                    name="message_id" 
+                    value="{{ message.id }}"
+                  >
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <p class="box box-right">{{ message.message }}</p>
+            <div class="reaction-container reaction-container-right">
+              <p>
+                <i class="fas fa-smile"></i>
+                1
+              </p>
+              <form action="/reaction_message" method="POST">
+                <input type="hidden" value="{{ channel.id }}" name="cid" />
+                <button 
+                  class="reaction-button" 
+                  name="message_id" 
+                  value="{{ message.id }}"
+                >
+                  <!-- 上記の値で受け渡しできるか相談予定 -->
+                  <i class=" far fa-smile "></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="messages">
+            <p class="user-name">{{ message.user_name }}</p>
+            <p class="box box-left">{{ message.message }}</p>
+            <div class="reaction-container reaction-container-left">
+              <p>
+                <i class="fas fa-smile"></i>
+                1
+              </p>
+              <form action="/reaction_message" method="POST">
+                <input type="hidden" value="{{ channel.id }}" name="cid" />
+                <button 
+                  class="reaction-button" 
+                  name="message_id" 
+                  value="{{ message.id }}"
+                >
+                  <i class=" far fa-smile "></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+                    <!-- =======if文を入れたver 差し替え用========= -->
+                    <!-- <div id="message-area">
+                      {% if messages|length > 0 %} 
+                        {% for message in messages %} 
+                          {% if message.uid == uid %}
+                            <div class="my-messages">
+                              <div class="message-options">
+                                <p class="my-user-name">{{ message.user_name }}</p>
+                                <div class="option-icons">
+                                  {% if uid == uid %}
+                                    <form action="/pin_message" method="POST">
+                                      <input type="hidden" value="{{ channel.id }}" name="cid" />
+                                      <button 
+                                        class="pinned-message-button" 
+                                        name="message_id" 
+                                        value="{{ message.id }}"
+                                      >
+                                        <i class="fas fa-thumbtack fa-rotate-45"></i>
+                                      </button>
+                                    </form>
+                                  {% endif %} 
+                                  <form action="/delete_message" method="POST">
+                                    <input type="hidden" value="{{ channel.id }}" name="cid" />
+                                    <button 
+                                      class="delete-message-button" 
+                                      name="message_id" 
+                                      value="{{ message.id }}"
+                                    >
+                                      <i class="far fa-trash-alt"></i>
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                              <p class="box box-right">{{ message.message }}</p>
+                              <div class="reaction-container reaction-container-right">
+                                {% if message.reactioncount > 0 %}
+                                  <p>
+                                    <i class="fas fa-smile"></i>
+                                    {{ reactioncount }}
+                                  </p>
+                                {% endif %}
+                                <form action="/reaction_message" method="POST">
+                                  <input type="hidden" value="{{ channel.id }}" name="cid" />
+                                  <button 
+                                    class="reaction-button" 
+                                    name="message_id" 
+                                    value="{{ message.id }}"
+                                  >
+                                    <i class=" far fa-smile "></i>
+                                  </button>
+                                </form>
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="messages">
+                              <p class="user-name">{{ message.user_name }}</p>
+                              <p class="box box-left">{{ message.message }}</p>
+                              <div class="reaction-container reaction-container-left">
+                                {% if message.reactioncount > 0 %}
+                                  <p>
+                                    <i class="fas fa-smile"></i>
+                                    {{ reactioncount }}
+                                  </p>
+                                {% endif %}
+                                <form action="/reaction_message" method="POST">
+                                  <input type="hidden" value="{{ channel.id }}" name="cid" />
+                                  <button 
+                                    class="reaction-button" 
+                                    name="message_id" 
+                                    value="{{ message.id }}"
+                                  >
+                                    <i class=" far fa-smile "></i>
+                                  </button>
+                                </form>
+                              </div>
+                            </div>
+                          {% endif %} 
+                        {% endfor %} 
+                      {% else %}
+                        <div id="no-message"><p>まだメッセージがありません</p></div>
+                      {% endif %}
+                    </div> -->
+                    <!-- =======if文を入れたver ここまで========= -->
+
+
+                    <!--------- feature/142はここまでです ---------->
+
+        <div class="typing-box-wrapper">
+          <form class="typing-box" action="/message" method="POST" name="newMessageForm">
+            <textarea name="message" id="message" autofocus></textarea>
+            <input type="hidden" name="cid" value="#" />
+            <div id="message-send-tooltip">
+              <button type="submit" id="add-message-button">
+                <i class="fa-regular fa-paper-plane fa-lg"></i>
+              </button>
+            </div>
+          </form>
+        </div>
     </div>
-
-
   </body>
 </html>
