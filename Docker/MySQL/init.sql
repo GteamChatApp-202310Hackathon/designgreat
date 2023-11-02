@@ -30,6 +30,7 @@ CREATE TABLE users (
 
 CREATE TABLE channels (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id varchar(255) NOT NULL,
   channel_name varchar(255) UNIQUE NOT NULL,
   description TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -89,7 +90,7 @@ CREATE TABLE reactions (
 INSERT INTO roles(role_name) VALUES ('teacher');
 INSERT INTO users(id, user_name, password, teacher_password, email, role_id) VALUES
 ('970af84c-dd40-47ff-af23-282b72b7cca8', 'GteamUser', '37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578', '1234', 'test@gmail.com', 1);
-INSERT INTO channels(channel_name, description) VALUES ('Gteam', 'hogehogehoge');
+INSERT INTO channels(user_id, channel_name, description) VALUES ('970af84c-dd40-47ff-af23-282b72b7cca8', 'Gteam', 'hogehogehoge');
 INSERT INTO messages(user_id, channels_id, message) VALUES ('970af84c-dd40-47ff-af23-282b72b7cca8', 1, 'Send test message.');
 INSERT INTO pin_messages(message_id) VALUES (1);
 INSERT INTO user_reactions(message_id, reaction_id, user_id) VALUES (1, 1, '970af84c-dd40-47ff-af23-282b72b7cca8');
