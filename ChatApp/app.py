@@ -12,7 +12,7 @@ app.permanent_session_lifetime = timedelta(days=30)
 
 #Constant definition
 EMAIL_PATTERN = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-TEACHER_PASSWORD = "secret_teacher_password"  # Temporary teacher password
+TEACHER_PASSWORD = "secret_teacher_password"  # Temporary teacher password.　Plans to move to environment variables.
 
 #Display login page
 @app.route('/login')
