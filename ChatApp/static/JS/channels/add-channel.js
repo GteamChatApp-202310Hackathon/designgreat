@@ -1,9 +1,4 @@
-const addChannelModal = document.getElementById("add-channel-modal");
-const addPageButtonClose = document.getElementById("add-page-close-button");
-const addChannelConfirmButton = document.getElementById("add-channel-confirmation-button");
-
 // チャンネルを登録する時の処理
-
 const addChannelModal = document.getElementById("add-channel-modal");
 const addPageButtonClose = document.getElementById("add-page-close-button");
 const addChannelConfirmButton = document.getElementById("add-channel-confirmation-button");

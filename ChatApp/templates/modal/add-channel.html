@@ -1,29 +1,25 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
+  <head> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>チャンネル追加</title>
-    <link href="../../designgreat/ChatApp/static/CSS/add-channel.css" rel="stylesheet" />
+    <link href= "../../static/css/styles.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
-    <link rel="icon" href="../../designgreat/ChatApp/static/img/favicon.ico" />
+    <link rel="icon" href= "../../static/img/favicon.ico" />
     <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
   </head>
-  <body>-->
-
-<!--全体モーダル-->
+ 
+  <body>
 <div id="add-channel-modal" class="modal">
-  <!--モーダルコンテナ-->
   <div class="modal-content">
-    <!--Header部分-->
     <div class="modal-header">
       <h1>チャンネル作成</h1>
       <span class="modalClose" id="add-page-close-button">×</span>
     </div>
-    <!--チャンネルフォーム部分-->
     <form name="addChannelForm" class="modal-body" action="/" method="POST">
       <label for="channelTitle" class="channel-name">チャンネル名</label>
       <input type="text" class="channel-form-input" name="channelTitle" />
@@ -34,5 +30,9 @@
   </div>
 </div>
 
-<!--</body>
-</html>-->
+<script src="{{url_for('static',filename='js/Channels/add-channel.js')}}"
+type="text/javascript"
+></script>
+
+ </body>
+</html>
