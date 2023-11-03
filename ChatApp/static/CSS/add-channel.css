@@ -1,0 +1,124 @@
+.modal {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: var(--white);
+  justify-content: center;
+  align-items: center;
+}
+
+
+#add-channel-modal,
+#update-channel-modal,
+#delete-channel-modal {
+  display: none;
+}
+
+.modal-content {
+  background-color: var(--white);
+  margin: 20% auto;
+  width: 70%;
+  border: 3px solid var(--grey);
+  border-radius: 10px;
+  animation-name: modalopen;
+  animation-duration: 1s;
+  position: relative;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-header h1 {
+  margin: 1rem 0;
+  color: var(--white);
+}
+
+.modal-header {
+  background: var(--grey);
+  padding: 3px 15px 3px 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalClose {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.modalClose:hover {
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--grey);
+  border-radius: 0 0 20px 20px;
+}
+
+.channel-name,
+.channel-details {
+  width: 70%;
+  text-align: left;
+}
+
+.channel-form-input {
+  width: 70%;
+  background-color: var(--white);
+  margin-top: 5px;
+  margin-bottom: 25px;
+  padding: 0.5rem;
+  color: var(--grey);
+  border: 3px solid var(--grey);
+  border-radius: 10px;
+}
+
+.channel-form-input:hover {
+  background-color: var(--pink);
+  color: var(--grey);
+}
+
+.channel-form-input:focus {
+  background-color: var(--pink);
+  color: var(--grey);
+}
+
+.modal-body p,
+.modal-body a {
+  width: 70%;
+}
+
+.modal-body button {
+  width: 30%;
+  background-color: var(--yellow);
+  border-radius: 10px;
+  border: 3px solid var(--grey);
+  color: var(--grey);
+  margin-left: auto;
+  margin-right: 14%;
+  padding: 0.3rem;
+}
+
+.modal-body button:hover {
+  background-color: var(--orange);
+}
+
+@media screen and (max-width: 768px) {
+  .modal-body button {
+    margin: inherit;
+    width: calc(70% + 1rem);
+  }
+}

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
-    <link rel="icon" href="../../static/img/favicon.ico" />
+    <link rel="icon" href="./../static/img/favicon.ico" />
     <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -204,17 +204,20 @@
                     </div> -->
                     <!-- =======if文を入れたver ここまで========= -->
 
-
-                    <!--------- feature/142はここまでです ---------->
-
         <div class="typing-box-wrapper">
-          <form class="typing-box" action="/message" method="POST" name="newMessageForm">
+          <form 
+            class="typing-box" 
+            action="/message" 
+            method="POST" 
+            name="newMessageForm"
+          >
             <textarea name="message" id="message" autofocus></textarea>
-            <input type="hidden" name="cid" value="#" />
+            <input type="hidden" name="cid" value="{{ channel.id }}" />
             <div id="message-send-tooltip">
               <button type="submit" id="add-message-button">
-                <i class="fa-regular fa-paper-plane fa-lg"></i>
+                <i class="fas fa-paper-plane"></i>
               </button>
+              </div>
             </div>
           </form>
         </div>

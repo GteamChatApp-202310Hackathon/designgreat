@@ -43,11 +43,11 @@
   border-radius:50%;
   background-color: var(--yellow);
   border:none;
+  cursor: pointer;
 }
 
 #channel-update-button:hover {
   background-color: var(--orange);
-  border:none;
 }
 
 #to-index-button{
@@ -129,6 +129,7 @@ a.fa-home{
   font-size: 1rem;
   padding: 0 8px 0 8px;
   color: var(--grey);
+  cursor: pointer;
 }
 
 .fa-rotate-45 {
@@ -141,6 +142,7 @@ a.fa-home{
   font-size: 1rem;
   padding: 0 8px 0 8px;
   color: var(--grey);
+  cursor: pointer;
 } 
 
 .box {
@@ -154,7 +156,7 @@ a.fa-home{
   border-radius: 10px;
   background-color: var(--white);
   color: var(--grey);
-
+  overflow-wrap:break-word;
 }
 
 .box-right {
@@ -184,6 +186,7 @@ a.fa-home{
   padding: 0.5em;
   margin: 4px 0 0 0;
   color: var(--grey);
+  cursor: pointer;
 }
 
 .reaction-container-right{
@@ -210,58 +213,54 @@ a.fa-home{
 .reaction-container-left{
   margin-left: auto;
 }
-
-
-
-
-/* <!--------- feature/142はここまでです ----------> */
-
-
-
-
-
-
-
 .typing-box-wrapper {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 15vh;
-  background-color: white;
-  background-size: contain;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+  min-height: 16vh;
+  background-color: var(--white);
 }
 
 .typing-box {
-  height: 80%;
-  width: 90%;
-  margin: auto;
-  position: relative;
-  background-color: var(--snow);
-  border-radius: 8px;
-  border: solid 1px lightgrey;
+  width: 100vw;
+  min-height: 16vh;
+  bottom: 0;
   display: flex;
+  justify-content:center;
 }
 
 .typing-box textarea {
-  background-color: transparent;
+  resize: none;
+  cursor: pointer;
   width: 100%;
-  padding: 0.5em;
-  flex-grow: 1;
+  min-height: 100%;
+  margin: 1% 1%;
+  border-color: var(--grey);
+  border-radius: 10px;
+  padding: 1rem 1rem 2rem 1rem;
 }
 
 .typing-box textarea:focus {
-  cursor: pointer;
+  cursor: default;
+}
+
+#message-send-tooltip{
+  margin-right: auto;
+  margin-top: auto;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
 #add-message-button {
-  height: 100%;
-  width: 40px;
-  padding: 0;
-  margin: 0;
-  font-size: 1.5em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--yellow);
+}
+
+#add-message-button:hover {
+  color: var(--orange);
 }
 
 /* ========================================================== */
@@ -273,14 +272,18 @@ a.fa-home{
   }
 }
 
-@media screen and (max-width: 639px) {
-  .chat-box {
-    padding-left: 0;
-    width: 100%;
+@media screen and (max-width: 680px) {
+  #chatroom-name {
+    font-size: 1.5rem;
   }
 
-  .typing-box-wrapper,
-  #chat-header {
+  #chatroom-description {
+    font-size: 1rem;
+  }
+  }
+
+@media screen and (max-width: 639px) {
+  .chat-box {
     width: 100%;
   }
 }
@@ -292,9 +295,7 @@ a.fa-home{
   .message-options{
     width: 40%;
   }
-
   .messages{
     width: 40%;
-  }
-  
+  } 
 }
