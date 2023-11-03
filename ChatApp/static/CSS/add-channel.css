@@ -11,12 +11,12 @@
   align-items: center;
 }
 
-/*
+
 #add-channel-modal,
 #update-channel-modal,
 #delete-channel-modal {
   display: none;
-}*/
+}
 
 .modal-content {
   background-color: var(--white);
@@ -117,12 +117,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .modal-content {
-    margin: 35% auto;
-    width: 95%;
-  }
-
   .modal-body button {
-    margin: auto;
+    margin: inherit;
+    width: calc(100% + 1rem);
   }
 }
