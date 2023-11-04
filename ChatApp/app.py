@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash, abort
+from flask import Flask, request, redirect, render_template, session, flash
 from datetime import timedelta
 import hashlib
 import uuid
@@ -16,8 +16,8 @@ TEACHER_PASSWORD = "secret_teacher_password"  # Temporary teacher password.　Pl
 
 #Display login page
 @app.route('/login')
-def signup():
-  return render_template('hoge')
+def login():
+  return render_template('registration/login.html')
 
 #Hashing passwords whith SHA-256
 def hash_password(password):
@@ -44,7 +44,7 @@ def user_login():
   return redirect('/')
 
 #Logout
-@app.route('/login')
+@app.route('/logout')
 def logout():
   session.clear()
   return redirect('/login')
@@ -163,7 +163,7 @@ def add_message():
     return redirect('/detail/{channel_id}'.format(channel_id = channel_id ))
 
 #Delete Message
-@app.route('delete_message', methods=['POST'])
+@app.route('/delete_message', methods=['POST'])
 def delete_message():
   user_id = session.get("user_id")
   if user_id is None:
@@ -188,4 +188,4 @@ def show_error500(error):
     return render_template('error/500.html'),500
 
 if __name__ == '__main__':
-  app.run(host="0.0.0.0", debug=False)
+    app.run(host="0.0.0.0", debug=True)
