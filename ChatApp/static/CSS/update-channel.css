@@ -116,6 +116,6 @@
 @media screen and (max-width: 768px) {
   .modal-body button {
     margin: inherit;
-    width: calc(100% + 1rem);
+    width: calc(70% + 1rem);
   }
 }

@@ -1,13 +1,6 @@
-a {
-  text-decoration: none;
-}
-
-html {
-  background-image: url("..\..\static\img\background.png");
-  background-size: cover;
-}
-
 #channels-list-container {
+  background-image: url("..\img\background.png");
+  background-size: cover;
   padding-top: 11vh;
   display: flex;
   justify-content: center;
@@ -45,6 +38,7 @@ html {
 .channel-box li a {
   color: var(--grey);
   flex-grow: 1;
+  text-decoration: none;
 }
 
 .delete-button {
@@ -54,6 +48,7 @@ html {
   width: 28px;
   padding: 3px;
   border: none;
+  color: var(--grey);
 }
 
 .add-channel-button {
@@ -64,6 +59,7 @@ html {
   display: flex;
   position: absolute;
   right: 0;
+  color: var(--grey);
 }
 
 #add-channel-pagination {
@@ -83,6 +79,7 @@ html {
   left: 90vw;
   width: 100%;
   display: flex;
+  color: var(--grey);
 }
 
 
@@ -123,6 +120,7 @@ html {
 #next,
 .pagination li {
   padding: 4px;
+  color: var(--grey);
 }
 
 /* レスポンシブ */
