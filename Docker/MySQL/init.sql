@@ -51,7 +51,9 @@ CREATE TABLE user_reactions (
   user_id varchar(255) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   deleted_at TIMESTAMP NULL,
+  UNIQUE INDEX user_message_reaction_unique (user_id, message_id, reaction_id),
   FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (reaction_id) REFERENCES reactions(id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
