@@ -1,0 +1,149 @@
+#channels-list-container {
+  background-image: url("../img/background.png");
+  background-size: cover;
+  padding-top: 11vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 11vh);
+  margin-left: auto;
+  padding-bottom: 38px;
+}
+
+#channels-list {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-box {
+  padding: 0;
+}
+
+.channel-box li {
+  list-style: none;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background-color: var(--white);
+  border-radius: 10px;
+  margin: 10px 0;
+  color: var(--orange);
+}
+
+.channel-box li a {
+  color: var(--grey);
+  flex-grow: 1;
+  text-decoration: none;
+}
+
+.delete-button {
+  font-size: 16px;
+  background-color: transparent;
+  height: 28px;
+  width: 28px;
+  padding: 3px;
+  border: none;
+  color: var(--grey);
+}
+
+.add-channel-button {
+  font-size: 22px;
+  padding: 4px 0;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  position: absolute;
+  right: 0;
+  color: var(--grey);
+}
+
+#add-channel-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.logout {
+  font-size: 22px;
+  padding: 4px 0;
+  border: none;
+  background-color: transparent;
+  position: fixed;
+  top: 5vh;
+  left: 90vw;
+  width: 100%;
+  display: flex;
+  color: var(--grey);
+}
+
+
+/* pagination */
+
+#pagination-wrapper {
+  z-index: 6;
+  width: 100%;
+}
+
+#pagination-wrapper>div {
+  margin: auto;
+  width: fit-content;
+}
+
+.pagination-container,
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination {
+  padding-left: 0;
+  max-width: 50vw;
+}
+
+.pagination li {
+  color: var(--black);
+  width: 20px;
+  font-weight: bold;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#prev,
+#next,
+.pagination li {
+  padding: 4px;
+  color: var(--grey);
+}
+
+/* レスポンシブ */
+
+@media screen and (max-width: 768px) {
+  #channels-list {
+    width: 90%;
+  }
+
+  .channel-title {
+    left: 0;
+  }
+
+  .channel-box {
+    width: 100%;
+  }
+
+  .channel-box li a {
+    font-size: 16px;
+  }
+
+  #pagination-wrapper {
+    width: 100%;
+    padding-right: 3vw;
+  }
+}

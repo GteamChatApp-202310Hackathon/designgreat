@@ -1,5 +1,10 @@
+/* body{
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 100vw;
+} */
+
 .registration-wrapper{
-  /* 画面縮小時、下に余白ができてしまう。registration-form-wrapperが原因か？*/
   width: 100vw;
   min-height: 100vh;
   font-family: 'Noto Sans JP', sans-serif;
@@ -15,7 +20,7 @@
 .registration-container {
   width: 100%;
   height: 100%;
-  position: absolute;
+  /* position: absolute; */
 
 }
 
@@ -26,10 +31,9 @@
 }
 
 .registration-form-wrapper {
-  margin: 3% 6% 0 auto;
+  margin-left: auto;
   width:  35%;
-  /* height: 90%;  */
-  /* 原因？？ */
+  padding: 3% 6% 3% 0;
   overflow-y: scroll;
 }
 
@@ -100,6 +104,7 @@
   font-weight: bold;
   padding-top: 0.6em;
   padding-bottom: 0.6em;
+  cursor: pointer;
 }
 
 .error-message-position{
@@ -140,9 +145,10 @@
   }
 
   .registration-form-wrapper {
-    margin: 10% auto auto auto;
     width:  80%;
     overflow-y: scroll;
+    padding: 5%;
+
   }
 
   .switch-register-mode-container {

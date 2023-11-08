@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャンネル編集</title>
+    <link href="../../static/css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../static/img/favicon.ico" />
+    <script src="https://kit.fontawesome.com/753a917fd9.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <div id="update-channel-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>チャンネル編集</h1>
+          <span class="modalClose" id="update-page-close-button">×</span>
+        </div>
+        <form name="updateChannelForm" class="modal-body" action="/update_channel" method="POST">
+          <label for="channelTitle" class="channel-name">チャンネル名</label>
+          <input type="text" class="channel-form-input" name="channelTitle" />
+          <label for="channelDescription" class="channel-details">チャンネル詳細</label>
+          <input type="text" class="channel-form-input" name="channelDescription" />
+          <!-- ここのchannel.idのところ後で変更 -->
+          <input type="hidden" name="cid" value="#" />
+          <button id="add-channel-update-button">編集</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="{{url_for('static',filename='js/Channels/update-channel.js')}}" type="text/javascript"></script>
+
+  </body>
+
+</html>
