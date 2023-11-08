@@ -9,7 +9,7 @@ USE designgreat;
 GRANT ALL PRIVILEGES ON designgreat.* TO 'testuser';
 
 CREATE TABLE users (
-  id varchar(255) NOT NULL,
+  id varchar(255) UNIQUE NOT NULL,
   user_name varchar(255) UNIQUE NOT NULL,
   password varchar(100) NOT NULL,
   teacher_password varchar(100),
@@ -23,7 +23,7 @@ CREATE TABLE users (
 
 CREATE TABLE channels (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) NOT NULL,
+  user_id varchar(255) UNIQUE NOT NULL,
   channel_name varchar(255) UNIQUE NOT NULL,
   description TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -34,20 +34,22 @@ CREATE TABLE channels (
 
 CREATE TABLE messages (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) NOT NULL,
-  channels_id bigint UNSIGNED NOT NULL,
+  user_id varchar(255) UNIQUE NOT NULL,
+  channel_id bigint UNSIGNED NOT NULL,
   pin_message boolean NOT NULL DEFAULT FALSE,
   message text,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   deleted_at TIMESTAMP NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (channels_id) REFERENCES channels(id) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (channel_id) REFERENCES channels(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE reactions (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) NOT NULL,
-  message_id bigint UNSIGNED NOT NULL
+  user_id varchar(255) UNIQUE NOT NULL,
+  message_id bigint UNSIGNED NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- データ挿入
@@ -60,7 +62,7 @@ INSERT INTO channels(user_id, channel_name, description) VALUES (@last_user_id, 
 
 SET @last_channel_id = (SELECT LAST_INSERT_ID());
 
-INSERT INTO messages(user_id, channels_id, pin_message, message) VALUES (@last_user_id,@last_channel_id, TRUE, 'Send test message.');
+INSERT INTO messages(user_id, channel_id, pin_message, message) VALUES (@last_user_id,@last_channel_id, TRUE, 'Send test message.');
 
 SET @last_message_id = (SELECT LAST_INSERT_ID());
 
