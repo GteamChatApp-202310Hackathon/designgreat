@@ -11,7 +11,9 @@
   align-items: center;
 }
 
-#update-channel-modal {
+#add-channel-modal,
+#update-channel-modal,
+#delete-channel-modal {
   display: none;
 }
 
