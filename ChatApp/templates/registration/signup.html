@@ -69,7 +69,7 @@
             <p>{{ message }}</p>
           </div>
           {% endif %} {% endwith %}
-      </div>
+        </div>
         <input
           type="password"
           name="password2"
@@ -104,11 +104,22 @@
               id="teachers-password-input"
             />
           </div> 
+          {% if error_messages %}
+          <p>test</p>
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <div class="registration-button-container">
+          <button class="registration-button">アカウントを登録する</button>
+          <a class="switch-register-mode" href="{{ url_for('signup') }}">
+            ログインする
+          </a>        
         </div>
       </form>
-      <div class="registration-button-container">
-        <button class="registration-button">アカウントを登録する</button>         
-      </div>
     </div>
   </div>
 </div>

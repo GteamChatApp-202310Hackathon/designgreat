@@ -26,21 +26,23 @@ def hash_password(password):
 #Process login
 @app.route('/login', methods=['POST'])
 def user_login():
-  email = request.form.get('email')
-  password = request.form.get('password')
+  print("test")
+  name = request.form.get('name')
+  password = request.form.get('password1')
 
-  if not email or not password:
+  if not name or not password:
     flash('空のフォームがあるようです')
     return redirect('/login')
   
-  user = dbConnect.getUser(email)
+  user = dbConnect.getUser(name)
   hashed_password = hash_password(password)
 
   if user is None or hashed_password != user["password"]:
-    flash('メールアドレスまたはパスワードが間違っています')
+    flash('ユーザー名またはパスワードが間違っています')
     return redirect('/login')
   
-  session['user_id'] = user["user_id"]
+  session['user_id'] = user["id"]
+  print(session)
   return redirect('/')
 
 #Logout
@@ -72,6 +74,7 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
 #Process signup
 @app.route('/signup', methods=['POST'])
 def user_signup():
+  print("test")
   name = request.form.get('name')
   email = request.form.get('email')
   password1 = request.form.get('password1')
@@ -80,8 +83,9 @@ def user_signup():
   is_teacher = 'teacher' in request.form #Check that the teacher check box is chucked.
 
   error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
+  print(error_messages)
   if error_messages:
-    return render_template('signup.html', error_messages=error_messages)
+    return render_template('/registration/signup.html', error_messages=error_messages)
   
   user_id = str(uuid.uuid4())
   hashed_password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
@@ -92,14 +96,14 @@ def user_signup():
 # チャンネル一覧ページの表示
 @app.route('/')
 def index():
-    uid = session.get("uid")
+    uid = session.get("user_id")
     if uid is None:
         return redirect('/login')
     else:
         channels = dbConnect.getChannelAll()
         channels.reverse()
-        user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
-    return render_template('index.html', channels=channels, uid=uid, role=user_role)
+        #user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
+    return render_template('index.html', channels=channels, uid=uid)
 
 # チャンネルの追加
 @app.route('/', methods=['POST'])

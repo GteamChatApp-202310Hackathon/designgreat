@@ -4,30 +4,31 @@ from flask import abort
 
 class dbConnect:
     #Get user info at login.
-    def getUser(email):
+    def getUser(name):
         try:
             dbconn = DB.getConnection()
             cur = dbconn.cursor()
-            sql = "SELECT * FROM users WHERE email=%s"
-            cur.execute(sql, (email))
+            sql = "SELECT * FROM users WHERE user_name=%s"
+            cur.execute(sql, (name))
             user = cur.fetchone()
             return user
         except Exception as e:
-            print(e + 'が発生しています')
+            print(str(e) + 'が発生しています')
             abort(500)
         finally:
             cur.close()
 
     #Create user at signin
-    def createUser(user_id, name, email, password, teacher_password):
+    def createUser(user_id, name, email, password, teacher_password="None"):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO users(id, user_name, password, teacher_password, email, role_id) VALUES(%s, %s, %s, %s, %s);"
-            cur.execute(sql, (user_id, name, email, password, teacher_password))
+            print("test")
+            sql = "INSERT INTO users(id, user_name, password, teacher_password, email) VALUES(%s, %s, %s, %s, %s);"
+            cur.execute(sql, (user_id, name, password, teacher_password, email))
             conn.commit()
         except Exception as e:
-            print(e + 'が発生しています')
+            print(str(e) + 'が発生しています')
             abort(500)
         finally:
             cur.close()
