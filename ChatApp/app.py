@@ -108,7 +108,7 @@ def index():
 # チャンネルの追加
 @app.route('/', methods=['POST'])
 def add_channel():
-    uid = session.get("uid")
+    uid = session.get("user_id")
     if uid is None or dbConnect.getUserRoleById(uid) != 'teacher':
         return redirect('/login')
     channel_name = request.form.get('channelTitle')

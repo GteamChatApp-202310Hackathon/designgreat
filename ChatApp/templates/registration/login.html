@@ -28,6 +28,9 @@
           name="password1"
           id="password-input"
         />
+        <div class="registration-button-container">
+          <button class="registration-button">ログイン</button>         
+        </div>
         {% with messages = get_flashed_messages() %} {% if messages %}
         <div id="error-message">
           {% for message in messages %}
@@ -35,9 +38,6 @@
           {% endfor %}
         </div>
         {% endif %} {% endwith %}
-        <div class="registration-button-container">
-          <button class="registration-button">ログイン</button>         
-        </div>
       </form>
   </div>
 </div>
