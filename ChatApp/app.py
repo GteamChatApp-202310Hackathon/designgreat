@@ -67,9 +67,9 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
     errors['password_missmatch'] = 'パスワードが一致しません'
   if re.match(EMAIL_PATTERN, email) is None:
     errors['email_injustice'] = '正しいメールアドレスの形式ではありません'
-  if dbConnect.getUser(email) is not None:
+  if dbConnect.getUser(email=email) is not None:
     errors['email_exist'] = '既に登録されたメールアドレスです'
-  if dbConnect.getUser(name) is not None:
+  if dbConnect.getUser(name=name) is not None:
     errors['name_exist'] = '既に登録されたユーザー名です'
   if is_teacher and teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')

@@ -4,13 +4,19 @@ from flask import abort
 
 class dbConnect:
     #Get user info at login.
-    def getUser(name):
+    def getUser(name=None, email=None):
         try:
             dbconn = DB.getConnection()
             cur = dbconn.cursor()
-            sql = "SELECT * FROM users WHERE user_name=%s"
-            cur.execute(sql, (name))
-            user = cur.fetchone()
+            user = None
+            if name:
+                sql = "SELECT * FROM users WHERE user_name=%s"
+                cur.execute(sql, (name,))
+                user = cur.fetchone()
+            elif email:
+                sql = "SELECT * FROM users WHERE email=%s"
+                cur.execute(sql, (email,))
+                user = cur.fetchone()
             return user
         except Exception as e:
             print(str(e) + 'が発生しています')
@@ -126,18 +132,24 @@ class dbConnect:
             cur.close()
 
     #Get all posted messages in the channel.
-    def getMessageAll(channel_id):
+    def getMessageAll(cid):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SERECT id, u.user_id, message FROM messages as m INNER JOIN users AS u ON m.user_id = u.id WHERE channel_id = %s"
-            cur.execute(sql, (channel_id))
-            conn.commit()
+            #sql = "SELECT m.id, u.id, m.message FROM messages as m INNER JOIN users AS u ON m.user_id = u.id WHERE channel_id = %s"
+            print("in_getmessageAll_cid" + cid)
+            sql = "SELECT * FROM messages WHERE channel_id = %s"
+            cur.execute(sql, (cid))
+            messages = cur.fetchall()
         except Exception as e:
             print(str(e) + 'が発生しています')
             abort(500)
         finally:
-            cur.close()
+            if cur is not None:
+                cur.close()
+            if conn is not None:
+                conn.close()
+        return messages
 
     #Create Message
     def createMessage(user_id, channel_id, message):
