@@ -12,7 +12,7 @@ app.permanent_session_lifetime = timedelta(days=30)
 
 #Constant definition
 EMAIL_PATTERN = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-TEACHER_PASSWORD = "secret_teacher_password"  # Temporary teacher password.　Plans to move to environment variables.
+TEACHER_PASSWORD = "teacher"  # Temporary teacher password.　Plans to move to environment variables.
 
 #Display login page
 @app.route('/login')
@@ -69,7 +69,7 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
     errors['email_injustice'] = '正しいメールアドレスの形式ではありません'
   if dbConnect.getUser(email) is not None:
     errors['email_exist'] = '既に登録されたメールアドレスです'
-  if dbConnect.getUser(email) is not None:
+  if dbConnect.getUser(name) is not None:
     errors['name_exist'] = '既に登録されたユーザー名です'
   if is_teacher and teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')
@@ -78,7 +78,6 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
 #Process signup
 @app.route('/signup', methods=['POST'])
 def user_signup():
-  print("test")
   name = request.form.get('name')
   email = request.form.get('email')
   password1 = request.form.get('password1')
@@ -100,12 +99,15 @@ def user_signup():
 # チャンネル一覧ページの表示
 @app.route('/')
 def index():
+    print("test")
     uid = session.get("user_id")
+    print(uid)
     if uid is None:
         return redirect('/login')
     else:
         channels = dbConnect.getChannelAll()
         channels.reverse()
+        print(channels)
         #user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
     return render_template('index.html', channels=channels, uid=uid)
 
@@ -145,15 +147,17 @@ def update_channel():
 @app.route('/detail/<cid>')
 def detail(cid):
     uid = session.get("uid")
-    if uid is None:
-        return redirect('/login')
+    #if uid is None:
+        #return redirect('/login')
 
     cid = cid
+    print(cid)
     channel = dbConnect.getChannelById(cid)
-  # messages = dbConnect.getMessageAll(cid)
+    messages = dbConnect.getMessageAll(cid)
+    print(messages)
 
-    return render_template('detail.html', channel=channel, uid=uid)
-  # return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+    #return render_template('detail.html', channel=channel, uid=uid)
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
 
 #Create Message
 @app.route('/message', methods=["POST"])
