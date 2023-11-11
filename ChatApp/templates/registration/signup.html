@@ -17,19 +17,27 @@
       <form class="registration-form" method="post">
         <div class="error-message-position">
           <h1 class="registration-title">新規登録</h1>
-          {% with messages = get_flashed_messages() %} {% if messages %}
-          <div id="error-message">
-            <p>{{ message }}</p>
-          </div>
-          {% endif %} {% endwith %}
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'empty' %}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <div class="error-message-position">
           <label for="signup-name-input">ユーザー名</label>
-          {% with messages = get_flashed_messages() %} {% if messages %}
-          <div id="error-message">
-            <p>{{ message }}</p>
-          </div>
-          {% endif %} {% endwith %}
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'name_exist' %}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <input
           type="text"
@@ -38,11 +46,18 @@
         />
         <div class="error-message-position">
           <label for="signup-email-input">メールアドレス</label>
-          {% with messages = get_flashed_messages() %} {% if messages %}
-          <div id="error-message">
-            <p>{{ message }}</p>
-          </div>
-          {% endif %} {% endwith %}
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'email_exist'%}
+              <li>{{ message }}</li>
+              {% endif %}
+              {%if field == 'email_injustice'%}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <input
           type="text"
@@ -51,11 +66,15 @@
         />
         <div class="error-message-position">
           <label for="signup-password-input">パスワード(英数字10桁以上)</label>
-          {% with messages = get_flashed_messages() %} {% if messages %}
-          <div id="error-message">
-            <p>{{ message }}</p>
-          </div>
-          {% endif %} {% endwith %}
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'password_length'%}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <input
           type="password"
@@ -64,11 +83,15 @@
         />
         <div class="error-message-position">
           <label for="signup-password-confirmation-input">パスワード(再入力)</label>
-          {% with messages = get_flashed_messages() %} {% if messages %}
-          <div id="error-message">
-            <p>{{ message }}</p>
-          </div>
-          {% endif %} {% endwith %}
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'password_missmatch'%}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <input
           type="password"
@@ -104,14 +127,6 @@
               id="teachers-password-input"
             />
           </div> 
-          {% if error_messages %}
-          <p>test</p>
-          <ul class="flashes">
-            {% for field,message in error_messages.items() %}
-            <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
         </div>
         <div class="registration-button-container">
           <button class="registration-button">アカウントを登録する</button>      

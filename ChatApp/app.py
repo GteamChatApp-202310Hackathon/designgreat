@@ -61,12 +61,16 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
   errors = {}
   if not all([name, email, password1, password2]):
     errors['empty'] = '入力されていない項目があります'
+  if len(password1) < 10:
+    errors['password_length'] = 'パスワードは10文字以上で入力してください'
   if password1 != password2:
     errors['password_missmatch'] = 'パスワードが一致しません'
   if re.match(EMAIL_PATTERN, email) is None:
     errors['email_injustice'] = '正しいメールアドレスの形式ではありません'
   if dbConnect.getUser(email) is not None:
     errors['email_exist'] = '既に登録されたメールアドレスです'
+  if dbConnect.getUser(email) is not None:
+    errors['name_exist'] = '既に登録されたユーザー名です'
   if is_teacher and teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')
   return errors
@@ -85,7 +89,7 @@ def user_signup():
   error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
   print(error_messages)
   if error_messages:
-    return render_template('/registration/signup.html', error_messages=error_messages)
+    return render_template('registration/signup.html', error_messages=error_messages)
   
   user_id = str(uuid.uuid4())
   hashed_password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
