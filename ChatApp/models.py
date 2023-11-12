@@ -29,7 +29,6 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            print("test")
             sql = "INSERT INTO users(id, user_name, password, teacher_password, email) VALUES(%s, %s, %s, %s, %s);"
             cur.execute(sql, (user_id, name, password, teacher_password, email))
             conn.commit()
@@ -137,7 +136,6 @@ class dbConnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             #sql = "SELECT m.id, u.id, m.message FROM messages as m INNER JOIN users AS u ON m.user_id = u.id WHERE channel_id = %s"
-            print("in_getmessageAll_cid" + cid)
             sql = "SELECT * FROM messages WHERE channel_id = %s"
             cur.execute(sql, (cid))
             messages = cur.fetchall()

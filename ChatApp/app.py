@@ -26,7 +26,6 @@ def hash_password(password):
 #Process login
 @app.route('/login', methods=['POST'])
 def user_login():
-  print("test")
   name = request.form.get('name')
   password = request.form.get('password1')
 
@@ -42,7 +41,6 @@ def user_login():
     return redirect('/login')
   
   session['user_id'] = user["id"]
-  print(session)
   return redirect('/')
 
 #Logout
@@ -86,7 +84,6 @@ def user_signup():
   is_teacher = 'teacher' in request.form #Check that the teacher check box is chucked.
 
   error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
-  print(error_messages)
   if error_messages:
     return render_template('registration/signup.html', error_messages=error_messages)
   
@@ -99,15 +96,12 @@ def user_signup():
 # チャンネル一覧ページの表示
 @app.route('/')
 def index():
-    print("test")
     uid = session.get("user_id")
-    print(uid)
     if uid is None:
         return redirect('/login')
     else:
         channels = dbConnect.getChannelAll()
         channels.reverse()
-        print(channels)
         #user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
     return render_template('index.html', channels=channels, uid=uid)
 
@@ -146,18 +140,13 @@ def update_channel():
 # チャンネル詳細ページの表示
 @app.route('/detail/<cid>')
 def detail(cid):
-    print("test_in_detail")
-    print(session)
     uid = session.get("uid")
-    print(uid)
     #if uid is None:
         #return redirect('/login')
 
     cid = cid
-    print(cid)
     channel = dbConnect.getChannelById(cid)
     messages = dbConnect.getMessageAll(cid)
-    print(messages)
 
     #return render_template('detail.html', channel=channel, uid=uid)
     return render_template('detail.html', messages=messages, channel=channel, uid=uid)
@@ -165,10 +154,7 @@ def detail(cid):
 #Create Message
 @app.route('/message', methods=["POST"])
 def add_message():
-    print('test_in_addmessage')
-    print(session)
     user_id = session['user_id']
-    print(user_id)
     if user_id is None:
       return redirect('/login')
     
