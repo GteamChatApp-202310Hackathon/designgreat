@@ -156,7 +156,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERTT INTO messages(user_id, channel_id, message) VALUES(%s, %s, %s)"
+            sql = "INSERT INTO messages(user_id, channel_id, message) VALUES(%s, %s, %s)"
             cur.execute(sql, (user_id, channel_id, message))
             conn.commit()
         except Exception as e:

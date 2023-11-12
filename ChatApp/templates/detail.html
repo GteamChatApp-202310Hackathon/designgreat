@@ -18,11 +18,13 @@
       </button>
     </div>
     <div class="pinned-message-area">
-      {% if message.pinned is not none %}
+      {% for message in messages %}
+      {% if message.pinned %}
       <div class="pinned-message-area">
         <p id="pinned-message">{{ message.pinned }}</p>
       </div>
-      {% endif %} 
+      {% endif %}
+    {% endfor %}
     </div>
     <div id="message-area">
       {% if messages|length > 0 %} 
@@ -58,12 +60,13 @@
               </div>
               <p class="box box-right">{{ message.message }}</p>
               <div class="reaction-container reaction-container-right">
-                {% if message.reactioncount > 0 %}
-                  <p>
-                    <i class="fas fa-smile"></i>
-                    {{ reactioncount }}
-                  </p>
-                {% endif %}
+                {% if message.reactioncount is defined and message.reactioncount > 0 %}
+                <p>
+                  <i class="fas fa-smile"></i>
+                  {{ message.reactioncount }}
+                </p>
+              {% endif %}
+              
                 <form action="/reaction_message" method="POST">
                   <input type="hidden" value="{{ channel.id }}" name="cid" />
                   <button 
@@ -81,10 +84,10 @@
               <p class="user-name">{{ message.user_name }}</p>
               <p class="box box-left">{{ message.message }}</p>
               <div class="reaction-container reaction-container-left">
-                {% if message.reactioncount > 0 %}
+                {% if message.reactioncount is defined and message.reactioncount > 0 %}
                   <p>
                     <i class="fas fa-smile"></i>
-                    {{ reactioncount }}
+                    {{ message.reactioncount }}
                   </p>
                 {% endif %}
                 <form action="/reaction_message" method="POST">

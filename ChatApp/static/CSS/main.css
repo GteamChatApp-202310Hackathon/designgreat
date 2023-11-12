@@ -60,6 +60,8 @@
   position: absolute;
   right: 0;
   color: var(--grey);
+  cursor: pointer;
+  z-index: 10;
 }
 
 #add-channel-pagination {
@@ -143,7 +145,7 @@
   }
 
   #pagination-wrapper {
-    width: 100%;
+    width: 74%;
     padding-right: 3vw;
   }
 }

@@ -1,12 +1,12 @@
 START TRANSACTION;
 
 DROP DATABASE IF EXISTS designgreat;
-DROP USER IF EXISTS 'testuser';
+DROP USER IF EXISTS 'testuser'@'localhost';
 
-CREATE USER 'testuser' IDENTIFIED BY 'testuser';
+CREATE USER 'testuser'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'testuser';
 CREATE DATABASE designgreat;
 USE designgreat;
-GRANT ALL PRIVILEGES ON designgreat.* TO 'testuser';
+GRANT ALL PRIVILEGES ON designgreat.* TO 'testuser'@'localhost';
 
 CREATE TABLE users (
   id varchar(255) UNIQUE NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE channels (
 
 CREATE TABLE messages (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) UNIQUE NOT NULL,
+  user_id varchar(255) NOT NULL,
   channel_id bigint UNSIGNED NOT NULL,
   pin_message boolean NOT NULL DEFAULT FALSE,
   message text,

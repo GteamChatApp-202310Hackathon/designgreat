@@ -146,7 +146,10 @@ def update_channel():
 # チャンネル詳細ページの表示
 @app.route('/detail/<cid>')
 def detail(cid):
+    print("test_in_detail")
+    print(session)
     uid = session.get("uid")
+    print(uid)
     #if uid is None:
         #return redirect('/login')
 
@@ -162,7 +165,10 @@ def detail(cid):
 #Create Message
 @app.route('/message', methods=["POST"])
 def add_message():
-    user_id = session.get(user_id)
+    print('test_in_addmessage')
+    print(session)
+    user_id = session['user_id']
+    print(user_id)
     if user_id is None:
       return redirect('/login')
     
