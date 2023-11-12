@@ -12,7 +12,7 @@ app.permanent_session_lifetime = timedelta(days=30)
 
 #Constant definition
 EMAIL_PATTERN = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-TEACHER_PASSWORD = "secret_teacher_password"  # Temporary teacher password.　Plans to move to environment variables.
+TEACHER_PASSWORD = "teacher"  # Temporary teacher password.　Plans to move to environment variables.
 
 #Display login page
 @app.route('/login')
@@ -26,21 +26,21 @@ def hash_password(password):
 #Process login
 @app.route('/login', methods=['POST'])
 def user_login():
-  email = request.form.get('email')
-  password = request.form.get('password')
+  name = request.form.get('name')
+  password = request.form.get('password1')
 
-  if not email or not password:
+  if not name or not password:
     flash('空のフォームがあるようです')
     return redirect('/login')
   
-  user = dbConnect.getUser(email)
+  user = dbConnect.getUser(name)
   hashed_password = hash_password(password)
 
   if user is None or hashed_password != user["password"]:
-    flash('メールアドレスまたはパスワードが間違っています')
+    flash('ユーザー名またはパスワードが間違っています')
     return redirect('/login')
   
-  session['user_id'] = user["user_id"]
+  session['user_id'] = user["id"]
   return redirect('/')
 
 #Logout
@@ -59,12 +59,16 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
   errors = {}
   if not all([name, email, password1, password2]):
     errors['empty'] = '入力されていない項目があります'
+  if len(password1) < 10:
+    errors['password_length'] = 'パスワードは10文字以上で入力してください'
   if password1 != password2:
     errors['password_missmatch'] = 'パスワードが一致しません'
   if re.match(EMAIL_PATTERN, email) is None:
     errors['email_injustice'] = '正しいメールアドレスの形式ではありません'
-  if dbConnect.getUser(email) is not None:
+  if dbConnect.getUser(email=email) is not None:
     errors['email_exist'] = '既に登録されたメールアドレスです'
+  if dbConnect.getUser(name=name) is not None:
+    errors['name_exist'] = '既に登録されたユーザー名です'
   if is_teacher and teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')
   return errors
@@ -81,7 +85,7 @@ def user_signup():
 
   error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
   if error_messages:
-    return render_template('signup.html', error_messages=error_messages)
+    return render_template('registration/signup.html', error_messages=error_messages)
   
   user_id = str(uuid.uuid4())
   hashed_password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
@@ -92,19 +96,19 @@ def user_signup():
 # チャンネル一覧ページの表示
 @app.route('/')
 def index():
-    uid = session.get("uid")
+    uid = session.get("user_id")
     if uid is None:
         return redirect('/login')
     else:
         channels = dbConnect.getChannelAll()
         channels.reverse()
-        user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
-    return render_template('index.html', channels=channels, uid=uid, role=user_role)
+        #user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
+    return render_template('index.html', channels=channels, uid=uid)
 
 # チャンネルの追加
 @app.route('/', methods=['POST'])
 def add_channel():
-    uid = session.get("uid")
+    uid = session.get("user_id")
     if uid is None or dbConnect.getUserRoleById(uid) != 'teacher':
         return redirect('/login')
     channel_name = request.form.get('channelTitle')
@@ -116,7 +120,6 @@ def add_channel():
     else:
         error = '既に同じ名前のチャンネルが存在しています'
         return render_template('error/error.html', error_message=error)
-
 
 # チャンネルの更新
 @app.route('/update_channel', methods=['POST'])
@@ -132,25 +135,24 @@ def update_channel():
     dbConnect.updateChannel(uid, channel_name, channel_description, cid)
     return redirect('/detail/{cid}'.format(cid = cid))
 
-
 # チャンネル詳細ページの表示
 @app.route('/detail/<cid>')
 def detail(cid):
-    uid = session.get("uid")
+    uid = session['user_id']
     if uid is None:
         return redirect('/login')
 
     cid = cid
     channel = dbConnect.getChannelById(cid)
-  # messages = dbConnect.getMessageAll(cid)
+    messages = dbConnect.getMessageAll(cid)
 
-    return render_template('detail.html', channel=channel, uid=uid)
-  # return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+    #return render_template('detail.html', channel=channel, uid=uid)
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
 
 #Create Message
 @app.route('/message', methods=["POST"])
 def add_message():
-    user_id = session.get(user_id)
+    user_id = session['user_id']
     if user_id is None:
       return redirect('/login')
     
