@@ -52,6 +52,7 @@ CREATE TABLE reactions (
   FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 -- データ挿入
 INSERT INTO users(id, user_name, password, teacher_password, email, role) VALUES
 ('970af84c-dd40-47ff-af23-282b72b7cca8', 'GteamUser', SHA2('your-password-here', 256), '1234', 'test@gmail.com',TRUE);

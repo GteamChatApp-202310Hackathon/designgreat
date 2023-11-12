@@ -121,7 +121,6 @@ def add_channel():
         error = '既に同じ名前のチャンネルが存在しています'
         return render_template('error/error.html', error_message=error)
 
-
 # チャンネルの更新
 @app.route('/update_channel', methods=['POST'])
 def update_channel():
@@ -135,7 +134,6 @@ def update_channel():
 
     dbConnect.updateChannel(uid, channel_name, channel_description, cid)
     return redirect('/detail/{cid}'.format(cid = cid))
-
 
 # チャンネル詳細ページの表示
 @app.route('/detail/<cid>')

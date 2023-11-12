@@ -68,7 +68,6 @@ class dbConnect:
         finally:
             cur.close()
 
-
     # cidからチャンネルの情報を取得する関数            
     def getChannelById(cid):
         try:
@@ -84,7 +83,6 @@ class dbConnect:
         finally:
             cur.close()
 
-
     # channel_nameからチャンネルの情報を取得する関数        
     def getChannelByName(channel_name):
         try:
@@ -99,7 +97,6 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
-
 
     # 新しいチャンネルを追加する関数
     def addChannel(uid, newChannelName, newChannelDescription):
