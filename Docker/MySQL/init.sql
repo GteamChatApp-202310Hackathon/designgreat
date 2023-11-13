@@ -23,7 +23,7 @@ CREATE TABLE users (
 
 CREATE TABLE channels (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) UNIQUE NOT NULL,
+  user_id varchar(255) NOT NULL,
   channel_name varchar(255) UNIQUE NOT NULL,
   description TEXT,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -46,7 +46,7 @@ CREATE TABLE messages (
 
 CREATE TABLE reactions (
   id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id varchar(255) UNIQUE NOT NULL,
+  user_id varchar(255) NOT NULL,
   message_id bigint UNSIGNED NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE ON UPDATE CASCADE
