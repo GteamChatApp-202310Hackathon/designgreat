@@ -177,7 +177,7 @@ class dbConnect:
         finally:
             cur.close()
 
-    #
+    #Create pin messages
     def updateMessageForPin(message_id):
         try:
             conn = DB.getConnection()
