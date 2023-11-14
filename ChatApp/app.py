@@ -99,11 +99,13 @@ def index():
     uid = session.get("user_id")
     if uid is None:
         return redirect('/login')
-    else:
-        channels = dbConnect.getChannelAll()
-        channels.reverse()
-        #user_role = dbConnect.getUserRole(uid)  # ユーザーの役割を取得
-    return render_template('index.html', channels=channels, uid=uid)
+    
+    channels = dbConnect.getChannelAll()
+    channels.reverse()
+    user_role = dbConnect.getUserRoleById(uid)  # ユーザーの役割を取得
+
+    # ユーザーの役割に基づいてテンプレートに渡す変数を設定
+    return render_template('index.html', channels=channels, uid=uid, user_role=user_role)
 
 # チャンネルの追加
 @app.route('/', methods=['POST'])
@@ -149,6 +151,20 @@ def detail(cid):
     #return render_template('detail.html', channel=channel, uid=uid)
     return render_template('detail.html', messages=messages, channel=channel, uid=uid)
 
+# チャンネルの削除
+@app.route('/delete/<int:cid>')
+def delete_channel(cid):
+    uid = session.get("uid")
+    if uid is None:
+        return redirect('/login') 
+    role = dbConnect.getUserRoleById(uid)
+    if not role:
+        flash('チャンネルは教員のみ削除可能です')
+        return redirect('/')
+    
+    dbConnect.deleteChannel(cid)
+    return redirect('/')
+  
 #Create Message
 @app.route('/message', methods=["POST"])
 def add_message():
