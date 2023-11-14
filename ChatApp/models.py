@@ -124,6 +124,20 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+            
+
+    def deleteMessage(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "DELETE FROM messages WHERE id=%s;"
+            cur.execute(sql, (message_id))
+            conn.commit()
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
 
     #Get all posted messages in the channel.
     def getMessageAll(channel_id):
