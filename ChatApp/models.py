@@ -176,3 +176,17 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+
+    #
+    def updateMessageForPin(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE messages SET role=true WHERE message_id = %s"
+            cur.execute(sql, (message_id))
+            conn.commit()
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
