@@ -1,15 +1,34 @@
-#channels-list-container {
+.main-container{
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-image: url("../img/background.png");
   background-size: cover;
-  padding-top: 11vh;
+}
+
+.logout {
+  font-size: 2.5rem;
+  border: none;
+  background: none;
+  color: var(--grey);
+  margin-left: auto;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+a.fa-solid{
+  color:var(--grey);
+  text-decoration: none;
+}
+
+#channels-list-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  min-height: calc(100vh - 11vh);
-  margin-left: auto;
-  padding-bottom: 38px;
+  width: 100vw;
+  min-height: calc(100vh-4.5rem);
 }
 
 #channels-list {
@@ -18,88 +37,16 @@
   flex-direction: column;
 }
 
-.channel-box {
-  padding: 0;
-}
-
-.channel-box li {
-  list-style: none;
-  padding: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-  background-color: var(--white);
-  border-radius: 10px;
-  margin: 10px 0;
-  color: var(--orange);
-}
-
-.channel-box li a {
-  color: var(--grey);
-  flex-grow: 1;
-  text-decoration: none;
-}
-
-.delete-button {
-  font-size: 16px;
-  background-color: transparent;
-  height: 28px;
-  width: 28px;
-  padding: 3px;
-  border: none;
-  color: var(--grey);
-}
-
-.add-channel-button {
-  font-size: 22px;
-  padding: 4px 0;
-  border: none;
-  background-color: transparent;
-  display: flex;
-  position: absolute;
-  right: 0;
-  color: var(--grey);
-}
-
-#add-channel-pagination {
+#pagination-wrapper{
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
+  align-items: center;  
 }
 
-.logout {
-  font-size: 22px;
-  padding: 4px 0;
-  border: none;
-  background-color: transparent;
-  position: fixed;
-  top: 5vh;
-  left: 90vw;
-  width: 100%;
+#pagination-container {
   display: flex;
-  color: var(--grey);
-}
-
-
-/* pagination */
-
-#pagination-wrapper {
-  z-index: 6;
-  width: 100%;
-}
-
-#pagination-wrapper>div {
-  margin: auto;
-  width: fit-content;
-}
-
-.pagination-container,
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;  
 }
 
 .pagination {
@@ -119,13 +66,69 @@
 #prev,
 #next,
 .pagination li {
-  padding: 4px;
+  font-size: 2.5rem;
+  padding: 0 0.5rem;
   color: var(--grey);
+  cursor: pointer;
+}
+
+.add-channel-button {
+  font-size: 2.5rem;
+  border: none;
+  background-color: transparent;
+  color: var(--grey);
+  position: absolute;
+  right:15%;
+  cursor: pointer;
+}
+
+.channel-box {
+  padding: 0;
+}
+
+.channel-box li {
+  list-style: none;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background-color: var(--white);
+  border-radius: 10px;
+  margin: 10px 0;
+  color: var(--orange);
+  cursor: pointer;
+}
+
+.channel-box li a {
+  color: var(--grey);
+  flex-grow: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete-button {
+  font-size: 16px;
+  background-color: transparent;
+  height: 28px;
+  width: 28px;
+  padding: 3px;
+  border: none;
+  color: var(--grey);
+  cursor: pointer;
 }
 
 /* レスポンシブ */
 
 @media screen and (max-width: 768px) {
+  .logout {
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: 3vw;
+    margin-top: 3vw;
+    margin-bottom: 0;
+  }
+
   #channels-list {
     width: 90%;
   }
@@ -145,5 +148,16 @@
   #pagination-wrapper {
     width: 100%;
     padding-right: 3vw;
+  }
+
+  #prev,
+  #next,
+  .pagination li {
+    font-size: 1.5rem;
+  }
+
+  .add-channel-button {
+    font-size: 1.5rem;
+    right:3vw;
   }
 }
