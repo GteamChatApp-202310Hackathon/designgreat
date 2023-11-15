@@ -61,7 +61,7 @@ class dbConnect:
             sql = "SELECT role FROM users WHERE id = %s;"
             cur.execute(sql, (uid,))
             result = cur.fetchone()
-            return result['role_name']
+            return result['role']
         except Exception as e:
             print(str(e) + 'が発生しています')
             abort(500)
