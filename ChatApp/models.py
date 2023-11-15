@@ -58,7 +58,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT role_name FROM roles INNER JOIN users ON roles.id = users.role_id WHERE users.id = %s;"
+            sql = "SELECT role FROM users WHERE id = %s;"
             cur.execute(sql, (uid,))
             result = cur.fetchone()
             return result['role_name']
