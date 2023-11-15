@@ -33,7 +33,9 @@
         </div>
         {% with messages = get_flashed_messages() %} {% if messages %}
         <div id="error-message">
+          {% for message in messages %}
           <p>{{ message }}</p>
+          {% endfor %}
         </div>
         {% endif %} {% endwith %}
       </form>

@@ -1,9 +1,3 @@
-/* body{
-  margin: 0 auto;
-  min-height: 100vh;
-  width: 100vw;
-} */
-
 .registration-wrapper{
   width: 100vw;
   min-height: 100vh;
@@ -20,8 +14,6 @@
 .registration-container {
   width: 100%;
   height: 100%;
-  /* position: absolute; */
-
 }
 
 .registration-logo {
@@ -90,7 +82,7 @@
 }
 
 .teachers-passform {
-  width: 50%;
+  width: 100%;
 }
 
 .registration-button {
@@ -128,6 +120,11 @@
   bottom: 0;
   margin: 0;
   padding-left: 0.5rem;
+}
+
+.flashes li{
+  color: var(--red);
+  list-style: none;
 }
 
 /* ====レスポンシブ=== */
@@ -170,7 +167,7 @@
   }
 
   .teachers-passform {
-    width: 60%;
+    width: 100%;
   }
 
 }
