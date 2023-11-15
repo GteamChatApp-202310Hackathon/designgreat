@@ -58,7 +58,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT role_name FROM roles INNER JOIN users ON roles.id = users.role_id WHERE users.id = %s;"
+            sql = "SELECT role FROM users WHERE id = %s;"
             cur.execute(sql, (uid,))
             result = cur.fetchone()
             return result['role_name']
@@ -67,7 +67,6 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
-
 
     # cidからチャンネルの情報を取得する関数            
     def getChannelById(cid):
@@ -84,7 +83,6 @@ class dbConnect:
         finally:
             cur.close()
 
-
     # channel_nameからチャンネルの情報を取得する関数        
     def getChannelByName(channel_name):
         try:
@@ -100,7 +98,6 @@ class dbConnect:
         finally:
             cur.close()
 
-
     # 新しいチャンネルを追加する関数
     def addChannel(uid, newChannelName, newChannelDescription):
         try:
@@ -115,7 +112,6 @@ class dbConnect:
         finally:
             cur.close()
 
-
     # cidを持つチャンネルの情報を更新する関数        
     def updateChannel(uid, newChannelName, newChannelDescription, cid):
         try:
@@ -129,6 +125,20 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+
+    #チャンネルを削除する関数
+    def deleteChannel(cid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "DELETE FROM channels WHERE id=%s;"
+            cur.execute(sql, (cid))
+            conn.commit()
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()            
 
     #Get all posted messages in the channel.
     def getMessageAll(cid):
