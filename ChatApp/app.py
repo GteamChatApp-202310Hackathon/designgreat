@@ -195,6 +195,21 @@ def delete_message():
   
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
+#Update message for pin
+@app.route('/poin_message', methods=['POST'])
+def pin_message():
+  user_id = session["user_id"]
+  if user_id is None:
+    return redirect('/login')
+  
+  message_id = request.form.get('message_id')
+  channel_id = request.form.get('message_id')
+
+  if message_id:
+    dbConnect.updateMessageForPin(message_id)
+  
+  return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
+
 #Display 404 error page
 @app.errorhandler(404)
 def show_error404(error):
