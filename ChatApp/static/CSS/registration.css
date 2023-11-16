@@ -53,9 +53,21 @@
   font-size: large;
 } 
 
+.registration-title-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.registration-title{
+  white-space: nowrap;
+  padding: 0%;
+  margin-right: min(1rem);
+}
+
 .teachers-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -63,6 +75,10 @@
   width: 50%;
   height: 100%;
   
+}
+
+.teachers-check ul{
+  padding: 0%;
 }
 
 .teachers-check input{
@@ -78,7 +94,6 @@
   display:block;
   position:relative;
   padding-left:25%;
-  margin-top: 0;
 }
 
 .teachers-passform {
@@ -106,23 +121,12 @@
   align-items:baseline
 }
 
-#error-message{
-  color: var(--red);
-  position: relative;
-}
-#error-message p{
-  bottom: 0;
-  margin: 0;
-  text-align: right;
+.flashes{
+  padding: 0;
+  margin-left: auto;
 }
 
-#exception-error-messege{
-  bottom: 0;
-  margin: 0;
-  padding-left: 0.5rem;
-}
-
-.flashes li{
+.flashes li,#visibility-flash{
   color: var(--red);
   list-style: none;
 }
@@ -168,6 +172,26 @@
 
   .teachers-passform {
     width: 100%;
+  }
+
+  .registration-title-container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .registration-title{
+    margin-bottom: 0%;
+  }
+
+  .error-message-position{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flashes{
+    margin: 0;
+    padding-left: 0.5rem;
   }
 
 }

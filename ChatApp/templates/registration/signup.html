@@ -15,7 +15,7 @@
         </a>
       </div>
       <form class="registration-form" method="post">
-        <div class="error-message-position">
+        <div class="registration-title-container">
           <h1 class="registration-title">新規登録</h1>
           {% if error_messages %}
           <ul class="flashes">
@@ -99,7 +99,6 @@
           id="signup-password-confirmation-input"
         />
         <div class="teachers-container">
-
           <div class="teachers-check">
             <label>
               <input class="js-check"
@@ -110,25 +109,31 @@
               />私は教員です
             </label>
           </div>
-          <span id="visibility">
-            <div class="teachers-passform">
-              <label for="teachers-password-input">
-                教員用パスワードを入力
-              </label>
-              {% with messages = get_flashed_messages() %} {% if messages %}
-              <div id="error-message">
-                <div id="exception-error-messege">
-                  パスワードが一致しません。
-                </div>
-              </div>
-              {% endif %} {% endwith %}
-              <input
-                type="password"
-                name="teacherspassword"
-                id="teachers-password-input"
-              />
-            </div> 
-          </span>
+
+
+          <div class="test">
+            <span id="visibility">
+              <div class="teachers-passform">
+                <label for="teachers-password-input">
+                  教員用パスワードを入力
+                </label>
+                <input
+                  type="password"
+                  name="teacherspassword"
+                  id="teachers-password-input"
+                />
+              </div> 
+            </span>
+            {% if error_messages %}
+            <ul class="flashes">
+              {% for field,message in error_messages.items() %}
+                {%if field == 'teacher_injustice'%}
+                <li id="visibility-flash">{{ message }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
         </div>
         <div class="registration-button-container">
           <button class="registration-button">アカウントを登録する</button>         
