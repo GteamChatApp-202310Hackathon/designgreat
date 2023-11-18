@@ -32,7 +32,7 @@
           <button class="registration-button">ログイン</button>         
         </div>
         {% with messages = get_flashed_messages() %} {% if messages %}
-        <div id="error-message">
+        <div class="flashes">
           {% for message in messages %}
           <p>{{ message }}</p>
           {% endfor %}

@@ -122,12 +122,12 @@
 }
 
 .flashes{
+  color: var(--red);
   padding: 0;
   margin-left: auto;
 }
 
 .flashes li,#visibility-flash{
-  color: var(--red);
   list-style: none;
 }
 
@@ -193,5 +193,4 @@
     margin: 0;
     padding-left: 0.5rem;
   }
-
 }
