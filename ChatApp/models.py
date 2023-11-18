@@ -246,6 +246,19 @@ class dbConnect:
         finally:
             cur.close()
 
+    # 特定のユーザーが特定のメッセージにリアクションしているかを確認するメソッド
+    def hasReaction(user_id, message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            cur.execute("SELECT id FROM reactions WHERE user_id = %s AND message_id = %s", (user_id, message_id))
+            return cur.fetchone() is not None
+        except Exception as e:
+            print(str(e))
+            abort(500)
+        finally:
+            cur.close()
+            
     # メッセージのリアクション数をカウントする関数
     def countReactions(message_id):
         try:
