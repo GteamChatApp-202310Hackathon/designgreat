@@ -231,7 +231,7 @@ def delete_pin_message():
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
 #リアクションの追加
-@app.route('/add_reaction', methods=['POST'])
+@app.route('/reaction_message', methods=['POST'])
 def add_reaction():
   user_id = session["user_id"]
   if user_id is None:
