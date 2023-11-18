@@ -46,17 +46,18 @@ const pagination = async () => {
     const lastChannelInPage = page * STEP;
 
     // 各チャンネル要素の作成
+    console.log(channels)
     channels.forEach((channel, i) => {
       if (i < firstChannelInPage - 1 || i > lastChannelInPage - 1) return;
       const a = document.createElement("a");
       const li = document.createElement("li");
       const channelURL = `/detail/${channel.id}`;
-      a.innerText = channel.name;
+      a.innerText = channel.channel_name;
       a.setAttribute("href", channelURL);
       li.appendChild(a);
 
       // もしチャンネル作成者uidと自分のuidが同じだった場合は削除ボタンを追加
-      if (uid === channel.uid) {
+      if (uid === channel.user_id) {
         const deleteButton = document.createElement("button");
         deleteButton.innerHTML =
           '<i class="fa-regular fa-trash-can fa-lg"></i>';
