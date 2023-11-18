@@ -210,6 +210,35 @@ def pin_message():
   
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
+#リアクションの追加
+@app.route('/add_reaction', methods=['POST'])
+def add_reaction():
+  user_id = session["user_id"]
+  if user_id is None:
+    return redirect('/login')
+    
+  message_id = request.form.get('message_id')
+
+  if dbConnect.addReaction(user_id, message_id):
+      flash('リアクションを追加しました')
+  else:
+      flash('リアクションは既に存在します')
+    
+  return redirect(request.referrer)
+
+#リアクションの削除
+@app.route('/remove_reaction', methods=['POST'])
+def remove_reaction():
+  user_id = session["user_id"]
+  if user_id is None:
+        return redirect('/login')
+    
+  message_id = request.form.get('message_id')
+  dbConnect.removeReaction(user_id, message_id)
+  flash('リアクションを削除しました')
+    
+  return redirect(request.referrer)
+
 #Display 404 error page
 @app.errorhandler(404)
 def show_error404(error):
