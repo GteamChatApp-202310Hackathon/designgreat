@@ -131,7 +131,7 @@ def add_channel():
 @app.route('/update_channel', methods=['POST'])
 def update_channel():
     uid = session.get("user_id")
-    if uid is None or dbConnect.getUserRoleById(uid) != 'teacher':
+    if uid is None or dbConnect.getUserRoleById(uid) != True:
         return redirect('/login')
 
     cid = request.form.get('cid')

@@ -1,12 +1,12 @@
 START TRANSACTION;
 
 DROP DATABASE IF EXISTS designgreat;
-DROP USER IF EXISTS 'testuser'@'localhost';
+DROP USER IF EXISTS 'designgreat';
 
-CREATE USER 'testuser'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'testuser';
+CREATE USER 'designgreat' IDENTIFIED BY 'saturday21';
 CREATE DATABASE designgreat;
 USE designgreat;
-GRANT ALL PRIVILEGES ON designgreat.* TO 'testuser'@'localhost';
+GRANT ALL PRIVILEGES ON designgreat.* TO 'designgreat';
 
 CREATE TABLE users (
   id varchar(255) UNIQUE NOT NULL,
