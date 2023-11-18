@@ -55,7 +55,7 @@ def signup():
   return render_template('registration/signup.html')
 
 #Validating signup input
-def validate_signup_input(name, email, password1, password2, teacher_password, is_teacher):
+def validate_signup_input(name, email, password1, password2, teacher_password, not_teacher):
   errors = {}
   if not all([name, email, password1, password2]):
     errors['empty'] = '入力されていない項目があります'
@@ -69,7 +69,7 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
     errors['email_exist'] = '既に登録されたメールアドレスです'
   if dbConnect.getUser(name=name) is not None:
     errors['name_exist'] = '既に登録されたユーザー名です'
-  if teacher_password != TEACHER_PASSWORD:
+  if not not_teacher and teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')
   return errors
 
@@ -81,13 +81,13 @@ def user_signup():
   password1 = request.form.get('password1')
   password2 = request.form.get('password2')
   teacher_password = request.form.get('teacherspassword')
+  not_teacher = not teacher_password
   if request.form.get('teacherspassword') == 'teacher':
     role = True
   else:
     role = False
-  is_teacher = 'teacher' in request.form 
 
-  error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
+  error_messages = validate_signup_input(name, email, password1, password2, teacher_password, not_teacher)
   if error_messages:
     return render_template('registration/signup.html', error_messages=error_messages)
   
@@ -211,6 +211,21 @@ def pin_message():
 
   if message_id:
     dbConnect.updateMessageForPin(message_id)
+  
+  return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
+
+#Delete pin message
+@app.route('/delete_pin_message', methods=['POST'])
+def delete_pin_message():
+  user_id = session["user_id"]
+  if user_id is None:
+    return redirect('/login')
+  
+  message_id = request.form.get('message_id')
+  channel_id = request.form.get('cid')
+
+  if message_id:
+    dbConnect.deleteMessageForPin(message_id)
   
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 

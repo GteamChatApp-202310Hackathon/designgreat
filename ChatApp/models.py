@@ -27,8 +27,6 @@ class dbConnect:
     #Create user at signin
     def createUser(user_id, name, email, password, role, teacher_password="None"):
         try:
-            print('creatUser1111')
-            print(role)
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "INSERT INTO users(id, user_name, password, teacher_password, email,role) VALUES(%s, %s, %s, %s, %s, %s);"
@@ -198,7 +196,20 @@ class dbConnect:
             cur.execute(sql, (message_id))
             conn.commit()
         except Exception as e:
-            print('pinmessage')
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+    #Delete pin messages
+    def deleteMessageForPin(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE messages SET pin_message=false WHERE id = %s"
+            cur.execute(sql, (message_id))
+            conn.commit()
+        except Exception as e:
             print(str(e) + 'が発生しています')
             abort(500)
         finally:
