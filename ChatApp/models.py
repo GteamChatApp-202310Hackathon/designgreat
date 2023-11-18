@@ -214,3 +214,48 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+            
+    # メッセージにリアクションを追加する関数
+    def addReaction(user_id, message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            # すでにリアクションがあるかチェック
+            cur.execute("SELECT id FROM reactions WHERE user_id = %s AND message_id = %s", (user_id, message_id))
+            if cur.fetchone():
+                return False  # 既にリアクションがあれば追加しない
+            cur.execute("INSERT INTO reactions (user_id, message_id) VALUES (%s, %s)", (user_id, message_id))
+            conn.commit()
+            return True
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+    # メッセージのリアクションを削除する関数
+    def removeReaction(user_id, message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            cur.execute("DELETE FROM reactions WHERE user_id = %s AND message_id = %s", (user_id, message_id))
+            conn.commit()
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+    # メッセージのリアクション数をカウントする関数
+    def countReactions(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) as count FROM reactions WHERE message_id = %s", (message_id,))
+            result = cur.fetchone()
+            return result['count'] if result else 0
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
