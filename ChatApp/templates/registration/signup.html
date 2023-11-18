@@ -115,13 +115,6 @@
               <label for="teachers-password-input">
                 教員用パスワードを入力
               </label>
-              {% with messages = get_flashed_messages() %} {% if messages %}
-              <div id="error-message">
-                <div id="exception-error-messege">
-                  パスワードが一致しません。
-                </div>
-              </div>
-              {% endif %} {% endwith %}
               <input
                 type="password"
                 name="teacherspassword"
@@ -129,6 +122,15 @@
               />
             </div> 
           </span>
+          {% if error_messages %}
+          <ul class="flashes">
+            {% for field,message in error_messages.items() %}
+              {%if field == 'teacher_injustice'%}
+              <li>{{ message }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          {% endif %}
         </div>
         <div class="registration-button-container">
           <button class="registration-button">アカウントを登録する</button>         

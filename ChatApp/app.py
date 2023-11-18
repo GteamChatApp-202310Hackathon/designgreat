@@ -69,7 +69,7 @@ def validate_signup_input(name, email, password1, password2, teacher_password, i
     errors['email_exist'] = '既に登録されたメールアドレスです'
   if dbConnect.getUser(name=name) is not None:
     errors['name_exist'] = '既に登録されたユーザー名です'
-  if is_teacher and teacher_password != TEACHER_PASSWORD:
+  if teacher_password != TEACHER_PASSWORD:
     errors['teacher_injustice'] = ('不正な教員パスワードです')
   return errors
 
@@ -80,8 +80,12 @@ def user_signup():
   email = request.form.get('email')
   password1 = request.form.get('password1')
   password2 = request.form.get('password2')
-  teacher_password = request.form.get('teacher_password')
-  is_teacher = 'teacher' in request.form #Check that the teacher check box is chucked.
+  teacher_password = request.form.get('teacherspassword')
+  if request.form.get('teacherspassword') == 'teacher':
+    role = True
+  else:
+    role = False
+  is_teacher = 'teacher' in request.form 
 
   error_messages = validate_signup_input(name, email, password1, password2, teacher_password, is_teacher)
   if error_messages:
@@ -89,7 +93,7 @@ def user_signup():
   
   user_id = str(uuid.uuid4())
   hashed_password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
-  dbConnect.createUser(user_id, name, email, hashed_password)
+  dbConnect.createUser(user_id, name, email, hashed_password, role, teacher_password)
   session['user_id'] = user_id
   return redirect('/')
 
@@ -111,7 +115,7 @@ def index():
 @app.route('/', methods=['POST'])
 def add_channel():
     uid = session.get("user_id")
-    if uid is None or dbConnect.getUserRoleById(uid) != 'teacher':
+    if uid is None or dbConnect.getUserRoleById(uid) != True:
         return redirect('/login')
     channel_name = request.form.get('channelTitle')
     channel = dbConnect.getChannelByName(channel_name)
@@ -188,7 +192,7 @@ def delete_message():
     return redirect('/login')
   
   message_id = request.form.get('message_id')
-  channel_id = request.form.get('message_id')
+  channel_id = request.form.get('cid')
 
   if message_id:
     dbConnect.deleteMessage(message_id)
@@ -196,14 +200,14 @@ def delete_message():
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
 #Update message for pin
-@app.route('/poin_message', methods=['POST'])
+@app.route('/pin_message', methods=['POST'])
 def pin_message():
   user_id = session["user_id"]
   if user_id is None:
     return redirect('/login')
   
   message_id = request.form.get('message_id')
-  channel_id = request.form.get('message_id')
+  channel_id = request.form.get('cid')
 
   if message_id:
     dbConnect.updateMessageForPin(message_id)
