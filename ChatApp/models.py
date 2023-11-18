@@ -25,12 +25,12 @@ class dbConnect:
             cur.close()
 
     #Create user at signin
-    def createUser(user_id, name, email, password, teacher_password="None"):
+    def createUser(user_id, name, email, password, role, teacher_password="None"):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO users(id, user_name, password, teacher_password, email) VALUES(%s, %s, %s, %s, %s);"
-            cur.execute(sql, (user_id, name, password, teacher_password, email))
+            sql = "INSERT INTO users(id, user_name, password, teacher_password, email,role) VALUES(%s, %s, %s, %s, %s, %s);"
+            cur.execute(sql, (user_id, name, password, teacher_password, email, role))
             conn.commit()
         except Exception as e:
             print(str(e) + 'が発生しています')
@@ -178,7 +178,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "DELETE FROM messages WHERE message_id = %s"
+            sql = "DELETE FROM messages WHERE id = %s"
             cur.execute(sql, (message_id))
             conn.commit()
         except Exception as e:
@@ -192,7 +192,21 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "UPDATE messages SET role=true WHERE message_id = %s"
+            sql = "UPDATE messages SET pin_message=true WHERE id = %s"
+            cur.execute(sql, (message_id))
+            conn.commit()
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+    #Delete pin messages
+    def deleteMessageForPin(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE messages SET pin_message=false WHERE id = %s"
             cur.execute(sql, (message_id))
             conn.commit()
         except Exception as e:
