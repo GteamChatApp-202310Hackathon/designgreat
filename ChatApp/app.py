@@ -130,7 +130,7 @@ def add_channel():
 # チャンネルの更新
 @app.route('/update_channel', methods=['POST'])
 def update_channel():
-    uid = session.get("uid")
+    uid = session.get("user_id")
     if uid is None or dbConnect.getUserRoleById(uid) != 'teacher':
         return redirect('/login')
 
