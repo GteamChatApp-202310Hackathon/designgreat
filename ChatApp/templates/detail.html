@@ -67,7 +67,12 @@
               </div>
               <p class="box box-right">{{ message.message }}</p>
               <div class="reaction-container reaction-container-right">
-
+                {% if message.reactioncount > 0 %}
+                  <p>
+                    <i class="fas fa-smile"></i>
+                    {{ reactioncount }}
+                  </p>
+                {% endif %}
                 <form action="/reaction_message" method="POST">
                   <input type="hidden" value="{{ channel.id }}" name="cid" />
                   <button 
@@ -85,7 +90,12 @@
               <p class="user-name">{{ message.user_id }}</p>
               <p class="box box-left">{{ message.message }}</p>
               <div class="reaction-container reaction-container-left">
-
+                {% if message.reactioncount > 0 %}
+                  <p>
+                    <i class="fas fa-smile"></i>
+                    {{ reactioncount }}
+                  </p>
+                {% endif %}
                 <form action="/reaction_message" method="POST">
                   <input type="hidden" value="{{ channel.id }}" name="cid" />
                   <button 
