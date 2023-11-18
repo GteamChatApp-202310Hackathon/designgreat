@@ -8,7 +8,7 @@
       {% if channel.abstract is not none %}
       <p id="chatroom-description">{{ channel.abstract }}</p>
       {% endif %} 
-      {% if uid == channel.uid %}
+      {% if uid == channel.user_id %}
       <button id="channel-update-button">
         <i class="fa-solid fa-pen-to-square fa-lg"></i>
       </button>
