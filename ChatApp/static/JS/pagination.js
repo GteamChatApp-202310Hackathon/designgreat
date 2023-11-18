@@ -46,7 +46,6 @@ const pagination = async () => {
     const lastChannelInPage = page * STEP;
 
     // 各チャンネル要素の作成
-    console.log(channels)
     channels.forEach((channel, i) => {
       if (i < firstChannelInPage - 1 || i > lastChannelInPage - 1) return;
       const a = document.createElement("a");

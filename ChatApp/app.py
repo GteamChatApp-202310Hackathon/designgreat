@@ -107,7 +107,6 @@ def index():
     channels = dbConnect.getChannelAll()
     channels.reverse()
     user_role = dbConnect.getUserRoleById(uid)  # ユーザーの役割を取得
-    print(channels)
 
     # ユーザーの役割に基づいてテンプレートに渡す変数を設定
     return render_template('index.html', channels=channels, uid=uid, user_role=user_role)
