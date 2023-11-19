@@ -146,9 +146,11 @@ class dbConnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             #sql = "SELECT m.id, u.id, m.message FROM messages as m INNER JOIN users AS u ON m.user_id = u.id WHERE channel_id = %s"
-            sql = "SELECT * FROM messages WHERE channel_id = %s"
+            #sql = "SELECT * FROM messages WHERE channel_id = %s"
+            sql = "SELECT m.*, COUNT(r.message_id) AS reactioncount FROM messages AS m INNER JOIN reactions AS r ON m.id = r.message_id WHERE m.channel_id = %s GROUP BY m.id;"
             cur.execute(sql, (cid))
             messages = cur.fetchall()
+            print(messages)
         except Exception as e:
             print(str(e) + 'が発生しています')
             abort(500)
