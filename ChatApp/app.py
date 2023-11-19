@@ -230,34 +230,25 @@ def delete_pin_message():
   
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
-#リアクションの追加
+#リアクションの追加または削除
 @app.route('/reaction_message', methods=['POST'])
-def add_reaction():
-  user_id = session["user_id"]
-  if user_id is None:
-    return redirect('/login')
-    
-  message_id = request.form.get('message_id')
-
-  if dbConnect.addReaction(user_id, message_id):
-      flash('リアクションを追加しました')
-  else:
-      flash('リアクションは既に存在します')
-    
-  return redirect(request.referrer)
-
-#リアクションの削除
-@app.route('/remove_reaction', methods=['POST'])
-def remove_reaction():
-  user_id = session["user_id"]
-  if user_id is None:
+def reaction_message():
+    user_id = session["user_id"]
+    if user_id is None:
         return redirect('/login')
     
-  message_id = request.form.get('message_id')
-  dbConnect.removeReaction(user_id, message_id)
-  flash('リアクションを削除しました')
+    message_id = request.form.get('message_id')
+    channel_id = request.form.get('cid')
+
+    # ユーザーが既にリアクションしているかどうかを確認
+    if dbConnect.hasReaction(user_id, message_id):
+        # リアクションが存在する場合、それを削除
+        dbConnect.removeReaction(user_id, message_id)
+    else:
+        # リアクションが存在しない場合、新しいリアクションを追加
+        dbConnect.addReaction(user_id, message_id)
     
-  return redirect(request.referrer)
+    return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
 #Display 404 error page
 @app.errorhandler(404)
