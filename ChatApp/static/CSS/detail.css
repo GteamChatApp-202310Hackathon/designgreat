@@ -16,7 +16,6 @@
   top: 0;
   right: 0;
   left: 0;
-
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -63,7 +62,7 @@ a.fa-home{
   text-decoration: none;
 }
 
-.pinned-message-area {
+#pinned-message-area {
   background-color: var(--yellow);
   height: 8vh;
   width: 100vw;
@@ -79,20 +78,16 @@ a.fa-home{
 
 #pinned-message{
   margin-left: 2rem;
-
 }
 
-/* <!--------- feature/141はここまでです ----------> */
-
 #message-area {
-  min-height: 100vh;
   width: 100%;
-  padding-top: 16vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  margin-top: 14vh;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  padding-top: 2rem;
+  padding-bottom: 20vh;
 }
 
 ::-webkit-scrollbar {
@@ -261,6 +256,10 @@ a.fa-home{
 
 #add-message-button:hover {
   color: var(--orange);
+}
+
+#no-message{
+  text-align: center;
 }
 
 /* ========================================================== */

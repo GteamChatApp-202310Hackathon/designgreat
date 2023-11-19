@@ -50,6 +50,7 @@ a.fa-solid{
 }
 
 .pagination {
+  display: flex;
   padding-left: 0;
   max-width: 50vw;
 }
@@ -57,10 +58,16 @@ a.fa-solid{
 .pagination li {
   color: var(--black);
   width: 20px;
-  font-weight: bold;
   list-style: none;
   display: flex;
   justify-content: center;
+  margin: 0.5em;
+  line-height: 1;
+}
+
+.pagination li.colored{
+  font-weight: bold;
+  border-bottom:solid 2px var(--grey)
 }
 
 #prev,
