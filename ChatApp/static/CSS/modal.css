@@ -115,9 +115,31 @@
   background-color: var(--orange);
 }
 
+#delete-confirmation-link{
+  width:30%;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: 14%;
+}
+#delete-channel-confirmation-button{
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .modal-body button {
     margin: inherit;
     width: calc(70% + 1rem);
+  }
+}
+
+@media screen and (max-width: 431px) {
+  .modal-header h1 {
+    font-size: medium;
+  }
+}
+
+@media screen and (max-width: 705px) {
+  .modal-body p {
+    width: 100%;
   }
 }
