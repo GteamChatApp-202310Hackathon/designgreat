@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block title %}
-<title>{{ channel.name }}</title>
+<title>{{ channel.channel_name }}</title>
 {% endblock %} {% block body %}
 <div class="chat-box">
   <div id="chat-header">
-    <p id="chatroom-name">{{ channel.name }}</p>
+    <p id="chatroom-name">{{ channel.channel_name }}</p>
     {% if channel.abstract is not none %}
-    <p id="chatroom-description">{{ channel.abstract }}</p>
+    <p id="chatroom-description">{{ channel.description }}</p>
     {% endif %} 
     {% if uid == channel.user_id %}
     <button id="channel-update-button">
@@ -16,13 +16,23 @@
       <a class="fas fa-home" href="{{ url_for('index') }}"></a>
     </button>
   </div>
-  {% if messages.pinned is not none %}
-    {%for message in messages%}
-      <div id="pinned-message-area">
-        <p id="pinned-message">{{ messages.pinned }}</p>
-      </div>
-    {% endfor %}
-  {% endif %} 
+  {% for message in messages %}
+    {% if message.pin_message == 1 %}
+    <div class="pinned-message-area">
+      <p class="pinned-message">{{ message.message }}</p>
+      <form action="/delete_pin_message" method="POST">
+        <input type="hidden" value="{{ channel.id }}" name="cid" />
+        <button 
+          class="delete-message-button" 
+          name="message_id" 
+          value="{{ message.id }}"
+        >
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </form>
+    </div>
+    {% endif %}
+  {% endfor %}
   <div id="message-area">
     {% if messages|length > 0 %} 
       {% for message in messages %} 
@@ -31,7 +41,7 @@
             <div class="message-options">
               <p class="my-user-name">{{ message.user_name }}</p>
               <div class="option-icons">
-                {% if uid == uid %}
+                {% if user_role == 1 %}
                   <form action="/pin_message" method="POST">
                     <input type="hidden" value="{{ channel.id }}" name="cid" />
                     <button 
@@ -77,7 +87,7 @@
           </div>
         {% else %}
           <div class="messages">
-            <p class="user-name">{{ message.user_id }}</p>
+            <p class="user-name">{{ message.user_name }}</p>
             <p class="box box-left">{{ message.message }}</p>
             <div class="reaction-container reaction-container-left">
               {% if message.reactioncount > 0 %}
@@ -91,7 +101,7 @@
                 <button 
                   class="reaction-button" 
                   name="message_id" 
-                  value="{{ messages.id }}"
+                  value="{{ message.id }}"
                 >
                   <i class=" far fa-smile "></i>
                 </button>

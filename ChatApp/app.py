@@ -106,7 +106,8 @@ def index():
     
     channels = dbConnect.getChannelAll()
     channels.reverse()
-    user_role = dbConnect.getUserRoleById(uid)  # ユーザーの役割を取得
+    user_role = dbConnect.getUserRoleById(uid)
+    print(user_role)  # ユーザーの役割を取得
 
     # ユーザーの役割に基づいてテンプレートに渡す変数を設定
     return render_template('index.html', channels=channels, uid=uid, user_role=user_role)
@@ -151,9 +152,10 @@ def detail(cid):
     cid = cid
     channel = dbConnect.getChannelById(cid)
     messages = dbConnect.getMessageAll(cid)
+    user_role = dbConnect.getUserRoleById(uid)
 
     #return render_template('detail.html', channel=channel, uid=uid)
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid, user_role=user_role)
 
 # チャンネルの削除
 @app.route('/delete/<int:cid>')
