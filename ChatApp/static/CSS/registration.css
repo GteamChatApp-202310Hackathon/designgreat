@@ -1,5 +1,4 @@
 .registration-wrapper{
-  /* 画面縮小時、下に余白ができてしまう。registration-form-wrapperが原因か？*/
   width: 100vw;
   min-height: 100vh;
   font-family: 'Noto Sans JP', sans-serif;
@@ -15,8 +14,6 @@
 .registration-container {
   width: 100%;
   height: 100%;
-  position: absolute;
-
 }
 
 .registration-logo {
@@ -26,10 +23,9 @@
 }
 
 .registration-form-wrapper {
-  margin: 3% 6% 0 auto;
+  margin-left: auto;
   width:  35%;
-  /* height: 90%;  */
-  /* 原因？？ */
+  padding: 3% 6% 3% 0;
   overflow-y: scroll;
 }
 
@@ -57,9 +53,21 @@
   font-size: large;
 } 
 
+.registration-title-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.registration-title{
+  white-space: nowrap;
+  padding: 0%;
+  margin-right: min(1rem);
+}
+
 .teachers-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -67,6 +75,10 @@
   width: 50%;
   height: 100%;
   
+}
+
+.teachers-check ul{
+  padding: 0%;
 }
 
 .teachers-check input{
@@ -82,11 +94,10 @@
   display:block;
   position:relative;
   padding-left:25%;
-  margin-top: 0;
 }
 
 .teachers-passform {
-  width: 50%;
+  width: 100%;
 }
 
 .registration-button {
@@ -100,6 +111,7 @@
   font-weight: bold;
   padding-top: 0.6em;
   padding-bottom: 0.6em;
+  cursor: pointer;
 }
 
 .error-message-position{
@@ -109,20 +121,14 @@
   align-items:baseline
 }
 
-#error-message{
+.flashes{
   color: var(--red);
-  position: relative;
-}
-#error-message p{
-  bottom: 0;
-  margin: 0;
-  text-align: right;
+  padding: 0;
+  margin-left: auto;
 }
 
-#exception-error-messege{
-  bottom: 0;
-  margin: 0;
-  padding-left: 0.5rem;
+.flashes li,#visibility-flash{
+  list-style: none;
 }
 
 /* ====レスポンシブ=== */
@@ -140,9 +146,10 @@
   }
 
   .registration-form-wrapper {
-    margin: 10% auto auto auto;
     width:  80%;
     overflow-y: scroll;
+    padding: 5%;
+
   }
 
   .switch-register-mode-container {
@@ -164,7 +171,26 @@
   }
 
   .teachers-passform {
-    width: 60%;
+    width: 100%;
   }
 
+  .registration-title-container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .registration-title{
+    margin-bottom: 0%;
+  }
+
+  .error-message-position{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flashes{
+    margin: 0;
+    padding-left: 0.5rem;
+  }
 }

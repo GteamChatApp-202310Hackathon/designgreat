@@ -1,0 +1,170 @@
+.main-container{
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../img/background.png");
+  background-size: cover;
+}
+
+.logout {
+  font-size: 2.5rem;
+  border: none;
+  background: none;
+  color: var(--grey);
+  margin-left: auto;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+a.fa-solid{
+  color:var(--grey);
+  text-decoration: none;
+}
+
+#channels-list-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  min-height: calc(100vh-4.5rem);
+}
+
+#channels-list {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+#pagination-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+#pagination-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  max-width: 50vw;
+}
+
+.pagination li {
+  color: var(--black);
+  width: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+  line-height: 1;
+}
+
+.pagination li.colored{
+  font-weight: bold;
+  border-bottom:solid 2px var(--grey)
+}
+
+#prev,
+#next,
+.pagination li {
+  font-size: 2.5rem;
+  padding: 0 0.5rem;
+  color: var(--grey);
+  cursor: pointer;
+}
+
+.add-channel-button {
+  font-size: 2.5rem;
+  border: none;
+  background-color: transparent;
+  color: var(--grey);
+  position: absolute;
+  right:15%;
+  cursor: pointer;
+}
+
+.channel-box {
+  padding: 0;
+}
+
+.channel-box li {
+  list-style: none;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  background-color: var(--white);
+  border-radius: 10px;
+  margin: 10px 0;
+  color: var(--orange);
+  cursor: pointer;
+}
+
+.channel-box li a {
+  color: var(--grey);
+  flex-grow: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete-button {
+  font-size: 16px;
+  background-color: transparent;
+  height: 28px;
+  width: 28px;
+  padding: 3px;
+  border: none;
+  color: var(--grey);
+  cursor: pointer;
+}
+
+/* レスポンシブ */
+
+@media screen and (max-width: 768px) {
+  .logout {
+    font-size: 1.5rem;
+    margin-left: auto;
+    margin-right: 3vw;
+    margin-top: 3vw;
+    margin-bottom: 0;
+  }
+
+  #channels-list {
+    width: 90%;
+  }
+
+  .channel-title {
+    left: 0;
+  }
+
+  .channel-box {
+    width: 100%;
+  }
+
+  .channel-box li a {
+    font-size: 16px;
+  }
+
+  #pagination-wrapper {
+    width: 100%;
+    padding-right: 3vw;
+  }
+
+  #prev,
+  #next,
+  .pagination li {
+    font-size: 1.5rem;
+  }
+
+  .add-channel-button {
+    font-size: 1.5rem;
+    right:3vw;
+  }
+}
