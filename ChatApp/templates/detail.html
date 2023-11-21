@@ -18,7 +18,7 @@
   </div>
   {% for message in messages %}
     {% if message.pin_message == 1 %}
-    <div class="pinned-message-area">
+    <div id="pinned-message-area">
       <p class="pinned-message">{{ message.message }}</p>
       <form action="/delete_pin_message" method="POST">
         <input type="hidden" value="{{ channel.id }}" name="cid" />
