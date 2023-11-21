@@ -62,7 +62,7 @@ a.fa-home{
   text-decoration: none;
 }
 
-.pinned-message-area {
+#pinned-message-area {
   background-color: var(--yellow);
   height: 8vh;
   width: 100vw;
