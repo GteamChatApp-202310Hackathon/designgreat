@@ -145,7 +145,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT m.*, COUNT(r.message_id) AS reactioncount FROM messages AS m LEFT OUTER JOIN reactions AS r ON m.id = r.message_id WHERE m.channel_id = %s GROUP BY m.id;"
+            sql = "SELECT m.*, COUNT(r.message_id) AS reactioncount, u.user_name FROM messages AS m LEFT OUTER JOIN reactions AS r ON m.id = r.message_id LEFT JOIN users AS u ON m.user_id = u.id WHERE m.channel_id = %s GROUP BY m.id;"
             cur.execute(sql, (cid))
             messages = cur.fetchall()
         except Exception as e:
