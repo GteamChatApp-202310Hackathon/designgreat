@@ -18,7 +18,7 @@
   </div>
   {% for message in messages %}
     {% if message.pin_message == 1 %}
-    <div class="pinned-message-area">
+    <div id="pinned-message-area">
       <p class="pinned-message">{{ message.message }}</p>
       <form action="/delete_pin_message" method="POST">
         <input type="hidden" value="{{ channel.id }}" name="cid" />
@@ -137,12 +137,12 @@
   const uid = JSON.parse('{{ uid|tojson }}');
 </script>
 <script
-  src="{{url_for('static',filename='js/Channels/update-channel.js')}}"
+  src="{{url_for('static',filename='JS/Channels/update-channel.js')}}"
   type="text/javascript"
 ></script>
 
 <script
-  src="{{url_for('static',filename='js/scroll-message.js')}}"
+  src="{{url_for('static',filename='JS/scroll-message.js')}}"
   type="text/javascript"
 ></script>
 <script
