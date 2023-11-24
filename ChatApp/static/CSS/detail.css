@@ -64,7 +64,6 @@ a.fa-home{
 
 #pinned-message-area {
   background-color: var(--yellow);
-  height: 8vh;
   width: 100vw;
   position: fixed;
   top: 8vh;
@@ -75,6 +74,7 @@ a.fa-home{
   z-index: 2;
   border-radius: 0 0 10px 10px;
   overflow: scroll;
+  flex-direction: column;
 }
 
 .pinned-message{
@@ -84,7 +84,7 @@ a.fa-home{
 
 #message-area {
   width: 100%;
-  margin-top: 14vh;
+  margin-top: 16vh;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -140,7 +140,11 @@ a.fa-home{
   padding: 0 8px 0 8px;
   color: var(--grey);
   cursor: pointer;
-} 
+}
+
+#pinned-message-area .delete-message-button{
+  padding:20px 8px 0 8px;
+}
 
 .box {
   position: relative;
@@ -262,6 +266,18 @@ a.fa-home{
 
 #no-message{
   text-align: center;
+}
+
+#pin-duplication {
+  font-size: small;
+  color: var(--red);
+  text-align: center;
+  margin: 0;
+}
+
+.innner-pinned-message-area{
+  display: flex;
+  flex-direction: row;
 }
 
 /* ========================================================== */

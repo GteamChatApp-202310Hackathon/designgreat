@@ -186,6 +186,21 @@ class dbConnect:
         finally:
             cur.close()
 
+    #Search pin messages
+    def getPinMessages(channel_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT id FROM messages WHERE channel_id = %s AND pin_message = true;"
+            cur.execute(sql, (channel_id))
+            result = cur.fetchone()
+            return result if result else False
+        except Exception as e:
+            print(str(e) + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
     #Create pin messages
     def updateMessageForPin(message_id):
         try:
