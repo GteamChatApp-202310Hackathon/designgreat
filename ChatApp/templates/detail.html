@@ -19,17 +19,26 @@
   {% for message in messages %}
     {% if message.pin_message == 1 %}
     <div id="pinned-message-area">
-      <p class="pinned-message">{{ message.message }}</p>
-      <form action="/delete_pin_message" method="POST">
-        <input type="hidden" value="{{ channel.id }}" name="cid" />
-        <button 
-          class="delete-message-button" 
-          name="message_id" 
-          value="{{ message.id }}"
-        >
-          <i class="far fa-trash-alt"></i>
-        </button>
-      </form>
+      <div class="innner-pinned-message-area">
+        <p class="pinned-message">{{ message.message }}</p>
+        <form action="/delete_pin_message" method="POST">
+          <input type="hidden" value="{{ channel.id }}" name="cid" />
+          <button 
+            class="delete-message-button" 
+            name="message_id" 
+            value="{{ message.id }}"
+          >
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </form>
+      </div>
+      {% with pin_messages = get_flashed_messages(category_filter=["pin_error"]) %}
+        {% if pin_messages %}
+          {% for pin_message in pin_messages %}
+            <p id="pin-duplication">{{ pin_message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
     {% endif %}
   {% endfor %}

@@ -139,6 +139,13 @@ def update_channel():
     channel_name = request.form.get('channelTitle')
     channel_description = request.form.get('channelDescription')
 
+    # チャンネル名が既に存在するかどうかを確認
+    existing_channel = dbConnect.getChannelByName(channel_name)
+    # existing_channelが辞書を返すため、idを取得するにはキーを使用する
+    if existing_channel and str(existing_channel['id']) != cid:
+        error = '既に同じ名前のチャンネルが存在しています'
+        return render_template('error/error.html', error_message=error)
+
     dbConnect.updateChannel(uid, channel_name, channel_description, cid)
     return redirect('/detail/{cid}'.format(cid = cid))
 
@@ -154,7 +161,6 @@ def detail(cid):
     messages = dbConnect.getMessageAll(cid)
     user_role = dbConnect.getUserRoleById(uid)
 
-    #return render_template('detail.html', channel=channel, uid=uid)
     return render_template('detail.html', messages=messages, channel=channel, uid=uid, user_role=user_role)
 
 # チャンネルの削除
@@ -212,8 +218,13 @@ def pin_message():
   channel_id = request.form.get('cid')
 
   if message_id:
-    dbConnect.updateMessageForPin(message_id)
-  
+    print(dbConnect.getPinMessages(channel_id))
+    if dbConnect.getPinMessages(channel_id):
+      flash('ピン留めされたメッセージが存在します。', 'pin_error')
+    else:
+      print("notsuc")
+      dbConnect.updateMessageForPin(message_id)
+
   return redirect('/detail/{channel_id}'.format(channel_id = channel_id))
 
 
