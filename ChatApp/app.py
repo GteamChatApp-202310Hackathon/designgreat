@@ -139,6 +139,13 @@ def update_channel():
     channel_name = request.form.get('channelTitle')
     channel_description = request.form.get('channelDescription')
 
+    # チャンネル名が既に存在するかどうかを確認
+    existing_channel = dbConnect.getChannelByName(channel_name)
+    # existing_channelが辞書を返すため、idを取得するにはキーを使用する
+    if existing_channel and str(existing_channel['id']) != cid:
+        error = '既に同じ名前のチャンネルが存在しています'
+        return render_template('error/error.html', error_message=error)
+
     dbConnect.updateChannel(uid, channel_name, channel_description, cid)
     return redirect('/detail/{cid}'.format(cid = cid))
 
