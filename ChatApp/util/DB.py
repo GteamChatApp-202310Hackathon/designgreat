@@ -4,10 +4,10 @@ class DB:
   def getConnection():
     try:
       conn = pymysql.connect(
-        host="db",
+        host="db-designgreat.c8aw7zh7sgmb.ap-northeast-1.rds.amazonaws.com",
         db="designgreat",
-        user="testuser",
-        password="testuser",
+        user="designgreat",
+        password="saturday21",
         charset="utf8",
         cursorclass=pymysql.cursors.DictCursor
       )
